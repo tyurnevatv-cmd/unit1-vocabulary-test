@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Unit 1 – Working in IT Vocabulary Test</title>
+<style>
+  * { box-sizing: border-box; }
+  body { margin: 0; font-family: Arial, sans-serif; background: #f4f6f8; color: #222; }
+  .wrap { max-width: 760px; margin: 0 auto; padding: 20px; }
+  .card { background: white; border-radius: 14px; padding: 24px; box-shadow: 0 2px 12px rgba(0,0,0,.08); }
+  h1 { margin-top: 0; font-size: 26px; }
+  .meta { display: flex; justify-content: space-between; gap: 12px; margin-bottom: 16px; font-size: 14px; }
+  .progress { height: 8px; background: #e5e7eb; border-radius: 999px; overflow: hidden; margin-bottom: 24px; }
+  .bar { height: 100%; width: 0; background: #111827; transition: width .2s ease; }
+  .question { font-size: 22px; line-height: 1.35; margin: 12px 0 22px; }
+  .answers { display: grid; gap: 12px; }
+  button.answer { width: 100%; text-align: left; padding: 16px; border-radius: 10px; border: 2px solid #d1d5db; background: white; font-size: 18px; cursor: pointer; touch-action: manipulation; }
+  button.answer:hover { border-color: #6b7280; }
+  button.answer.selected { border-color: #111827; background: #eef2f7; }
+  .nav { display: flex; justify-content: space-between; gap: 12px; margin-top: 24px; }
+  button.navbtn { padding: 12px 20px; border: 0; border-radius: 9px; background: #111827; color: white; font-size: 16px; cursor: pointer; touch-action: manipulation; }
+  button.navbtn:disabled { opacity: .4; cursor: default; }
+  .result { display: none; }
+  .score { font-size: 48px; font-weight: 700; margin: 12px 0; }
+  .review { margin-top: 24px; }
+  .item { border-top: 1px solid #e5e7eb; padding: 14px 0; }
+  .ok { color: #087f23; }
+  .bad { color: #b91c1c; }
+  @media (max-width: 600px) {
+    .wrap { padding: 10px; }
+    .card { padding: 18px; border-radius: 10px; }
+    .question { font-size: 20px; }
+    button.answer { font-size: 17px; padding: 14px; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="card" id="quizCard">
+    <h1>Unit 1 – Working in IT</h1>
+    <div class="meta">
+      <div id="counter">Вопрос 1 из 40</div>
+      <div id="answered">Отвечено: 0</div>
+    </div>
+    <div class="progress"><div class="bar" id="bar"></div></div>
+    <div class="question" id="question"></div>
+    <div class="answers" id="answers"></div>
+    <div class="nav">
+      <button class="navbtn" id="prevBtn">Назад</button>
+      <button class="navbtn" id="nextBtn">Далее</button>
+    </div>
+  </div>
+  <div class="card result" id="resultCard">
+    <h1>Результат</h1>
+    <div class="score" id="score"></div>
+    <div id="percent"></div>
+    <div class="nav"><button class="navbtn" id="restartBtn">Пройти ещё раз</button></div>
+    <div class="review" id="review"></div>
+  </div>
+</div>
+<script>
+const questions = [{"q":"Выберите правильный перевод: software developer","answers":["системный аналитик","разработчик программного обеспечения","руководитель проекта","специалист технической поддержки"],"correct":1},{"q":"Выберите правильный перевод: helpdesk supervisor","answers":["руководитель службы технической поддержки","администратор баз данных","веб-разработчик","системный аналитик"],"correct":0},{"q":"Выберите правильный перевод: support technician","answers":["руководитель проекта","специалист технической поддержки","поставщик услуг","специалист по электронной коммерции"],"correct":1},{"q":"Выберите правильный перевод: database administrator","answers":["системный аналитик","администратор баз данных","руководитель проекта","специалист технической поддержки"],"correct":1},{"q":"Выберите правильный перевод: systems analyst","answers":["системный аналитик","специалист по компьютерным сетям","администратор баз данных","руководитель службы поддержки"],"correct":0},{"q":"Выберите правильный перевод: tailor-made solution","answers":["готовое типовое решение","решение, разработанное под требования заказчика","обновление оборудования","сервисный центр"],"correct":1},{"q":"Выберите правильный перевод: specification","answers":["техническое задание; спецификация","производственные мощности","должностные обязанности","повестка дня"],"correct":0},{"q":"Выберите правильный перевод: equipment renewal","answers":["установка программного обеспечения","обновление оборудования","обслуживание базы данных","поставка услуг"],"correct":1},{"q":"Выберите правильный перевод: debug a program","answers":["проектировать программу","отлаживать программу; устранять ошибки","обновлять программу","устанавливать программу"],"correct":1},{"q":"Выберите правильный перевод: liaise with a client","answers":["взаимодействовать с клиентом","руководить командой","вести протокол","проводить собеседование"],"correct":0},{"q":"Выберите правильный перевод: occasionally","answers":["почти никогда","обычно","иногда; время от времени","постоянно"],"correct":2},{"q":"Выберите правильный перевод: product launch","answers":["обновление продукта","презентация и вывод нового продукта на рынок","поставка продукции","объявление о вакансии"],"correct":1},{"q":"Выберите правильный перевод: production facilities","answers":["производственные мощности","техническая поддержка","сервисные услуги","облачные вычисления"],"correct":0},{"q":"Выберите правильный перевод: cloud computing","answers":["обработка данных","облачные вычисления","компьютерная сеть","электронная коммерция"],"correct":1},{"q":"Выберите правильный перевод: word processing program","answers":["текстовый редактор","табличный процессор","операционная система","программа для презентаций"],"correct":0},{"q":"Выберите правильный перевод: alphanumeric","answers":["буквенно-цифровой","графический","аналоговый","числовой"],"correct":0},{"q":"Выберите правильный перевод: agenda","answers":["протокол совещания","повестка дня","предложение","должностная инструкция"],"correct":1},{"q":"Выберите правильный перевод: minutes","answers":["повестка дня","протокол совещания","расписание","отчёт о проекте"],"correct":1},{"q":"Выберите правильный перевод: job advert","answers":["должностная инструкция","объявление о вакансии","резюме","собеседование"],"correct":1},{"q":"Выберите правильный перевод: diagnose a problem","answers":["устранять проблему","диагностировать проблему; определять причину неисправности","описывать проблему","предотвращать проблему"],"correct":1},{"q":"Выберите правильный английский эквивалент: разработчик программного обеспечения","answers":["support technician","software developer","systems analyst","project manager"],"correct":1},{"q":"Выберите правильный английский эквивалент: руководитель проекта","answers":["project manager","helpdesk supervisor","database administrator","network technician"],"correct":0},{"q":"Выберите правильный английский эквивалент: специалист по электронной коммерции","answers":["e-commerce specialist","website developer","support technician","systems analyst"],"correct":0},{"q":"Выберите правильный английский эквивалент: технический навык","answers":["technical skill","business need","IT solution","job duties"],"correct":0},{"q":"Выберите правильный английский эквивалент: ввод данных","answers":["data entry","cloud computing","feedback","specification"],"correct":0},{"q":"Выберите правильный английский эквивалент: оказывать ИТ-поддержку","answers":["provide IT support","design a database","maintain a database","supervise a team"],"correct":0},{"q":"Выберите правильный английский эквивалент: соответствовать требованиям","answers":["meet requirements","write specifications","diagnose a problem","supply"],"correct":0},{"q":"Выберите правильный английский эквивалент: поставщик услуг; провайдер","answers":["provider","supplier","manufacturer","customer"],"correct":0},{"q":"Выберите правильный английский эквивалент: производитель","answers":["supplier","provider","manufacturer","vendor"],"correct":2},{"q":"Выберите правильный английский эквивалент: продвигать продукт","answers":["launch a product","promote a product","manufacture","queue"],"correct":1},{"q":"Выберите правильный английский эквивалент: стоять в очереди","answers":["queue","supply","attend a meeting","replace"],"correct":0},{"q":"Выберите правильный английский эквивалент: электронная таблица","answers":["spreadsheet","database","presentation program","operating system"],"correct":0},{"q":"Выберите правильный английский эквивалент: информационная безопасность","answers":["IT security","data entry","technical support","cloud computing"],"correct":0},{"q":"Выберите правильный английский эквивалент: поддерживать программное обеспечение в актуальном состоянии","answers":["keep software up to date","share a password","work from home","update a database"],"correct":0},{"q":"Выберите правильный английский эквивалент: председатель совещания","answers":["chairperson","participant","attendee","supervisor"],"correct":0},{"q":"Выберите правильный английский эквивалент: вести протокол совещания","answers":["take minutes","hold a meeting","make a decision","attend a meeting"],"correct":0},{"q":"Выберите правильный английский эквивалент: вносить предложение","answers":["make a suggestion","make a decision","disagree","replace"],"correct":0},{"q":"Выберите правильный английский эквивалент: объявление о вакансии","answers":["job advert","job title","job duties","job interview"],"correct":0},{"q":"Выберите правильный английский эквивалент: название должности","answers":["job title","job duties","job advert","job interview"],"correct":0},{"q":"Выберите правильный английский эквивалент: проводить собеседование с кандидатом","answers":["advertise a job","interview someone","apply for a job","diagnose"],"correct":1}];
+let current = 0;
+let userAnswers = new Array(questions.length).fill(null);
+const qEl = document.getElementById('question');
+const ansEl = document.getElementById('answers');
+const counterEl = document.getElementById('counter');
+const answeredEl = document.getElementById('answered');
+const barEl = document.getElementById('bar');
+const prevBtn = document.getElementById('prevBtn');
+const nextBtn = document.getElementById('nextBtn');
+function render() {
+  const q = questions[current];
+  counterEl.textContent = 'Вопрос ' + (current + 1) + ' из ' + questions.length;
+  answeredEl.textContent = 'Отвечено: ' + userAnswers.filter(x => x !== null).length;
+  barEl.style.width = (((current + 1) / questions.length) * 100) + '%';
+  qEl.textContent = q.q;
+  ansEl.innerHTML = '';
+  q.answers.forEach((answer, i) => {
+    const btn = document.createElement('button');
+    btn.className = 'answer' + (userAnswers[current] === i ? ' selected' : '');
+    btn.type = 'button';
+    btn.textContent = answer;
+    btn.addEventListener('click', () => { userAnswers[current] = i; render(); });
+    ansEl.appendChild(btn);
+  });
+  prevBtn.disabled = current === 0;
+  nextBtn.textContent = current === questions.length - 1 ? 'Завершить' : 'Далее';
+}
+prevBtn.addEventListener('click', () => { if (current > 0) { current--; render(); } });
+nextBtn.addEventListener('click', () => {
+  if (userAnswers[current] === null) { alert('Сначала выберите ответ.'); return; }
+  if (current < questions.length - 1) { current++; render(); } else { finishQuiz(); }
+});
+function finishQuiz() {
+  let correct = 0;
+  questions.forEach((q, i) => { if (userAnswers[i] === q.correct) correct++; });
+  const pct = Math.round(correct / questions.length * 100);
+  document.getElementById('quizCard').style.display = 'none';
+  document.getElementById('resultCard').style.display = 'block';
+  document.getElementById('score').textContent = correct + ' / ' + questions.length;
+  document.getElementById('percent').textContent = 'Правильных ответов: ' + pct + '%';
+  const review = document.getElementById('review');
+  review.innerHTML = '<h2>Проверка ответов</h2>';
+  questions.forEach((q, i) => {
+    const item = document.createElement('div');
+    item.className = 'item';
+    const ok = userAnswers[i] === q.correct;
+    item.innerHTML = '<div><strong>' + (i+1) + '. ' + escapeHtml(q.q) + '</strong></div>' +
+      '<div class="' + (ok ? 'ok' : 'bad') + '">Ваш ответ: ' + escapeHtml(q.answers[userAnswers[i]] || 'нет ответа') + '</div>' +
+      (ok ? '' : '<div class="ok">Правильный ответ: ' + escapeHtml(q.answers[q.correct]) + '</div>');
+    review.appendChild(item);
+  });
+  window.scrollTo({top: 0, behavior: 'smooth'});
+}
+function escapeHtml(str) {
+  return String(str).replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;').replaceAll('"','&quot;').replaceAll("'",'&#039;');
+}
+document.getElementById('restartBtn').addEventListener('click', () => {
+  current = 0;
+  userAnswers = new Array(questions.length).fill(null);
+  document.getElementById('resultCard').style.display = 'none';
+  document.getElementById('quizCard').style.display = 'block';
+  render();
+  window.scrollTo({top: 0, behavior: 'smooth'});
+});
+render();
+</script>
+</body>
+</html>
