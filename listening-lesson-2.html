@@ -25,6 +25,12 @@ table{width:100%;border-collapse:collapse}th,td{border:1px solid var(--border);p
 .score{position:fixed;right:14px;bottom:14px;background:#1f2b3d;color:#fff;padding:10px 14px;border-radius:14px;font-weight:800}
 .video{position:relative;padding-bottom:56.25%;height:0;overflow:hidden;border-radius:16px;background:#111}.video iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
 .small{color:var(--muted);font-size:13px}
+.sprintbox{background:linear-gradient(135deg,#fff8dc,#fff);border:2px solid #f6c94b;border-radius:20px;padding:24px;text-align:center}
+.sprintprompt{font-size:clamp(28px,5vw,46px);font-weight:900;margin:18px 0;color:#263348}
+.sprintanswer{display:none;font-size:clamp(22px,4vw,34px);font-weight:900;color:#51b568;margin:14px 0}
+.sprintanswer.show{display:block}
+.sprinttimer{font-size:46px;font-weight:900;color:#876fe0;font-variant-numeric:tabular-nums}
+.sprintmeta{color:#6d7890;font-weight:700;margin-top:6px}
 @media(max-width:720px){.grid,.three{grid-template-columns:1fr}.hero{padding:22px}}
 </style>
 </head>
@@ -34,6 +40,7 @@ table{width:100%;border-collapse:collapse}th,td{border:1px solid var(--border);p
 <button data-go="u22">UNIT 2.2</button>
 <button data-go="u23">UNIT 2.3</button>
 <button data-go="friends">FRIENDS</button>
+<button data-go="sprint">5-MIN SPRINT</button>
 <button data-go="finish">FINISH</button>
 </nav>
 <main>
@@ -183,6 +190,44 @@ table{width:100%;border-collapse:collapse}th,td{border:1px solid var(--border);p
 </div>
 </section>
 
+
+<section id="sprint">
+<div class="hero" style="background:linear-gradient(135deg,#f6c94b,#ff796a)">
+  <div>5-MINUTE CHAT CHALLENGE</div>
+  <h1>RUSSIAN → ENGLISH</h1>
+  <p>Translate as fast as you can and type your answer in the class chat.</p>
+</div>
+
+<div class="card">
+  <h2>How it works</h2>
+  <p>Teacher shows one Russian word or phrase. Students type the English translation in the chat. After 15–20 seconds, reveal the answer and move on.</p>
+  <p><strong>Rule:</strong> spelling counts. First correct answer in the chat gets 1 point.</p>
+</div>
+
+<div class="sprintbox">
+  <div class="sprinttimer" id="sprintTimer">05:00</div>
+  <div class="sprintmeta" id="sprintCount">Prompt 1 of 12</div>
+  <div class="sprintprompt" id="sprintPrompt">откладывать деньги</div>
+  <div class="sprintanswer" id="sprintAnswer">save up</div>
+  <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:16px">
+    <button class="check" onclick="startSprintTimer()">START 5 MIN</button>
+    <button class="check" style="background:#876fe0" onclick="revealSprint()">SHOW ANSWER</button>
+    <button class="check" style="background:#37b9ad" onclick="nextSprint()">NEXT</button>
+    <button class="check" style="background:#6d7890" onclick="resetSprint()">RESET</button>
+  </div>
+</div>
+
+<div class="card">
+  <h2>Vocabulary pool</h2>
+  <p class="small">The prompts recycle vocabulary from Unit 2.2, Unit 2.3 and the Friends family-dinner scene.</p>
+  <div class="grid three">
+    <div><span class="tag">Unit 2.2</span><p>money, baby routines, worries</p></div>
+    <div><span class="tag">Unit 2.3</span><p>care, responsibility, elderly relatives</p></div>
+    <div><span class="tag">Friends</span><p>criticism, independence, family pressure</p></div>
+  </div>
+</div>
+</section>
+
 <section id="finish">
 <div class="hero" style="background:linear-gradient(135deg,#37b9ad,#4f8fff)"><div>EXIT TICKET</div><h1>3 – 2 – 1</h1><p>Finish in your class chat.</p></div>
 <div class="grid three">
@@ -202,6 +247,52 @@ function checkSingle(group,fb){const opts=[...document.querySelectorAll('[data-g
 function checkCallers(){const key={tony:'money',carol:'time',lucy:'worry'};let n=0;for(const id in key){const e=document.getElementById(id);if(e.value===key[id]){n++;e.style.borderColor='var(--green)'}else e.style.borderColor='var(--red)'}const f=document.getElementById('fbCallers');f.textContent=n+'/3 correct';f.className='feedback '+(n===3?'good':'bad');if(n===3)add(2)}
 function checkViews(){const a=[...document.querySelectorAll('#viewTable select')];let n=0;a.forEach(e=>{if(e.value===e.dataset.key){n++;e.style.borderColor='var(--green)'}else e.style.borderColor='var(--red)'});const f=document.getElementById('fbViews');f.textContent=n+'/'+a.length+' correct';f.className='feedback '+(n===a.length?'good':'bad');if(n===a.length)add(2)}
 function checkMulti(){const a=[...document.querySelectorAll('.multi')];let good=0,bad=0,total=a.filter(x=>x.dataset.ok).length;a.forEach(x=>{x.classList.remove('correct','wrong');if(x.classList.contains('selected')){if(x.dataset.ok){good++;x.classList.add('correct')}else{bad++;x.classList.add('wrong')}}});const f=document.getElementById('fbMulti');if(good===total&&bad===0){f.textContent='Great!';f.className='feedback good';add(2)}else{f.textContent='Watch again: some topics are missing or extra.';f.className='feedback bad'}}
+
+const sprintItems=[
+  {ru:'откладывать деньги',en:'save up'},
+  {ru:'финансовая ситуация',en:'financial situation'},
+  {ru:'подгузники',en:'nappies'},
+  {ru:'постоянно беспокоиться',en:'worry all the time'},
+  {ru:'инсульт',en:'stroke'},
+  {ru:'дом престарелых / дом ухода',en:'nursing home'},
+  {ru:'справляться с трудной ситуацией',en:'cope with a difficult situation'},
+  {ru:'взять на себя ответственность',en:'take responsibility'},
+  {ru:'взбить подушки',en:'fluff the pillows'},
+  {ru:'переключить критику / давление с кого-либо',en:'take the heat off someone'},
+  {ru:'бросить кого-либо у алтаря',en:'leave someone at the altar'},
+  {ru:'стремиться к большему / ставить высокие цели',en:'shoot for the stars'}
+];
+let sprintIndex=0, sprintInterval=null, sprintLeft=300;
+function paintSprint(){
+  document.getElementById('sprintPrompt').textContent=sprintItems[sprintIndex].ru;
+  document.getElementById('sprintAnswer').textContent=sprintItems[sprintIndex].en;
+  document.getElementById('sprintAnswer').classList.remove('show');
+  document.getElementById('sprintCount').textContent='Prompt '+(sprintIndex+1)+' of '+sprintItems.length;
+}
+function revealSprint(){document.getElementById('sprintAnswer').classList.add('show')}
+function nextSprint(){sprintIndex=(sprintIndex+1)%sprintItems.length;paintSprint()}
+function resetSprint(){
+  sprintIndex=0;sprintLeft=300;
+  if(sprintInterval)clearInterval(sprintInterval);
+  sprintInterval=null;
+  document.getElementById('sprintTimer').textContent='05:00';
+  paintSprint();
+}
+function startSprintTimer(){
+  if(sprintInterval)clearInterval(sprintInterval);
+  sprintLeft=300;
+  const el=document.getElementById('sprintTimer');
+  const tick=()=>{
+    const m=String(Math.floor(sprintLeft/60)).padStart(2,'0');
+    const s=String(sprintLeft%60).padStart(2,'0');
+    el.textContent=m+':'+s;
+    if(sprintLeft<=0){clearInterval(sprintInterval);sprintInterval=null;el.textContent='TIME!';return}
+    sprintLeft--;
+  };
+  tick();sprintInterval=setInterval(tick,1000);
+}
+paintSprint();
+
 </script>
 </body>
 </html>
