@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Listening Lesson 2 – The Family</title>
+<style>
+:root{--bg:#f6f8fc;--card:#fff;--ink:#263348;--muted:#6d7890;--blue:#4f8fff;--teal:#37b9ad;--purple:#876fe0;--coral:#ff796a;--green:#51b568;--red:#d94b4b;--border:#dfe5ee}
+*{box-sizing:border-box}body{margin:0;font-family:Arial,sans-serif;background:linear-gradient(#f8fbff,#eef4fb);color:var(--ink)}
+nav{position:sticky;top:0;z-index:10;display:flex;gap:8px;overflow:auto;padding:10px;background:#fff;border-bottom:1px solid var(--border)}
+nav button{border:0;border-radius:999px;padding:9px 14px;font-weight:700;white-space:nowrap;cursor:pointer;background:#edf2f8;color:var(--ink)}
+nav button.active{background:var(--blue);color:white}
+main{max-width:1000px;margin:auto;padding:18px 14px 70px}section{display:none}section.active{display:block}
+.hero{padding:28px;border-radius:22px;color:#fff;background:linear-gradient(135deg,var(--blue),var(--purple));margin-bottom:18px}
+.hero h1{margin:4px 0 8px;font-size:clamp(30px,6vw,50px)}.hero p{margin:0;font-size:18px}
+.card{background:var(--card);border:1px solid var(--border);border-radius:18px;padding:20px;margin:14px 0;box-shadow:0 10px 28px rgba(35,55,85,.08)}
+.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}.three{grid-template-columns:repeat(3,1fr)}
+.choice{display:block;width:100%;text-align:left;margin:8px 0;padding:12px;border:1px solid var(--border);border-radius:12px;background:white;cursor:pointer}
+.choice.selected{border-color:var(--blue);background:#eaf2ff}.choice.correct{border-color:var(--green);background:#edf9f0}.choice.wrong{border-color:var(--red);background:#fff0f0}
+button.check{border:0;border-radius:12px;padding:10px 14px;background:var(--blue);color:white;font-weight:800;cursor:pointer}
+.feedback{font-weight:800;margin-top:10px;min-height:22px}.good{color:var(--green)}.bad{color:var(--red)}
+select,textarea,input{width:100%;padding:10px;border:1px solid #cfd8e5;border-radius:10px;font:inherit}textarea{min-height:76px}
+table{width:100%;border-collapse:collapse}th,td{border:1px solid var(--border);padding:9px}th{background:#f3f6fa;text-align:left}
+.tag{display:inline-block;padding:6px 10px;border-radius:999px;font-size:12px;font-weight:800;background:#eaf2ff;color:#275da9;margin-right:5px}
+.score{position:fixed;right:14px;bottom:14px;background:#1f2b3d;color:#fff;padding:10px 14px;border-radius:14px;font-weight:800}
+.video{position:relative;padding-bottom:56.25%;height:0;overflow:hidden;border-radius:16px;background:#111}.video iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.small{color:var(--muted);font-size:13px}
+@media(max-width:720px){.grid,.three{grid-template-columns:1fr}.hero{padding:22px}}
+</style>
+</head>
+<body>
+<nav>
+<button class="active" data-go="start">START</button>
+<button data-go="u22">UNIT 2.2</button>
+<button data-go="u23">UNIT 2.3</button>
+<button data-go="friends">FRIENDS</button>
+<button data-go="finish">FINISH</button>
+</nav>
+<main>
+<section id="start" class="active">
+<div class="hero"><div>LISTENING LESSON 2</div><h1>THE FAMILY</h1><p>Units 2.2 + 2.3 + sitcom challenge</p></div>
+<div class="grid three">
+<div class="card"><h3>1. Details</h3><p>Family life after having a baby.</p><span class="tag">Track 8</span></div>
+<div class="card"><h3>2. Viewpoints</h3><p>A family disagreement about caring for a parent.</p><span class="tag">Tracks 9–10</span></div>
+<div class="card"><h3>3. Sitcom</h3><p>Family traditions in Friends.</p><span class="tag">Video</span></div>
+</div>
+<div class="card"><h2>Warm-up</h2><p>What can change when a baby is born? Write three ideas in your class chat.</p></div>
+</section>
+
+<section id="u22">
+<div class="hero" style="background:linear-gradient(135deg,#4f8fff,#37b9ad)"><div>UNIT 2.2</div><h1>Children change everything</h1><p>Listen for specific information • Track 8</p></div>
+<div class="card">
+<h2>1. First listening</h2><p>What is the radio programme mainly about?</p>
+<button class="choice single" data-group="gist22" data-ok="1">How family life changes after having a child</button>
+<button class="choice single" data-group="gist22">How to choose a baby name</button>
+<button class="choice single" data-group="gist22">How to find a good school</button>
+<button class="check" onclick="checkSingle('gist22','fb22a')">CHECK</button><div id="fb22a" class="feedback"></div>
+</div>
+<div class="card">
+<h2>2. Match the callers</h2>
+<table>
+<tr><th>Caller</th><th>Main idea</th></tr>
+<tr><td>Tony</td><td><select id="tony"><option value="">Choose…</option><option value="money">Less money / more expenses</option><option value="time">No time / endless routines</option><option value="worry">Don’t worry too much</option></select></td></tr>
+<tr><td>Carol</td><td><select id="carol"><option value="">Choose…</option><option value="money">Less money / more expenses</option><option value="time">No time / endless routines</option><option value="worry">Don’t worry too much</option></select></td></tr>
+<tr><td>Lucy</td><td><select id="lucy"><option value="">Choose…</option><option value="money">Less money / more expenses</option><option value="time">No time / endless routines</option><option value="worry">Don’t worry too much</option></select></td></tr>
+</table>
+<button class="check" onclick="checkCallers()">CHECK</button><div id="fbCallers" class="feedback"></div>
+</div>
+<div class="card"><h2>3. One-sentence response</h2><p>Which caller do you agree with most, and why?</p><textarea placeholder="I agree with ... because ..."></textarea></div>
+</section>
+
+<section id="u23">
+<div class="hero" style="background:linear-gradient(135deg,#876fe0,#ff796a)"><div>UNIT 2.3</div><h1>What shall we do with Grandad?</h1><p>Facts, viewpoints and inference • Tracks 9–10</p></div>
+<div class="grid">
+<div class="card">
+<h2>1. James</h2><p>What is James most upset about?</p>
+<button class="choice single" data-group="james">His father did not want help</button>
+<button class="choice single" data-group="james" data-ok="1">He believes Kate did not do enough to care for their father</button>
+<button class="choice single" data-group="james">The hospital was too far away</button>
+<button class="check" onclick="checkSingle('james','fbJames')">CHECK</button><div id="fbJames" class="feedback"></div>
+</div>
+<div class="card">
+<h2>2. Kate</h2><p>What is Kate’s main defence?</p>
+<button class="choice single" data-group="kate">She did not know their father was ill</button>
+<button class="choice single" data-group="kate" data-ok="1">She had her own children and could not manage all the care alone</button>
+<button class="choice single" data-group="kate">She wanted James to move abroad</button>
+<button class="check" onclick="checkSingle('kate','fbKate')">CHECK</button><div id="fbKate" class="feedback"></div>
+</div>
+</div>
+<div class="card">
+<h2>3. Who believes this?</h2>
+<table id="viewTable">
+<tr><th>Statement</th><th>Answer</th></tr>
+<tr><td>Their father needed more care after a serious health problem.</td><td><select data-key="both"><option value="">Choose…</option><option value="james">James</option><option value="kate">Kate</option><option value="both">Both</option></select></td></tr>
+<tr><td>Kate should have taken more responsibility.</td><td><select data-key="james"><option value="">Choose…</option><option value="james">James</option><option value="kate">Kate</option><option value="both">Both</option></select></td></tr>
+<tr><td>One person should not have to do all the caring alone.</td><td><select data-key="kate"><option value="">Choose…</option><option value="james">James</option><option value="kate">Kate</option><option value="both">Both</option></select></td></tr>
+<tr><td>A nursing home became the practical solution.</td><td><select data-key="both"><option value="">Choose…</option><option value="james">James</option><option value="kate">Kate</option><option value="both">Both</option></select></td></tr>
+</table>
+<button class="check" onclick="checkViews()">CHECK</button><div id="fbViews" class="feedback"></div>
+</div>
+<div class="card"><h2>4. Your opinion</h2><p>Who has the stronger argument: James or Kate?</p><textarea placeholder="I think ... because ..."></textarea></div>
+</section>
+
+<section id="friends">
+<div class="hero" style="background:linear-gradient(135deg,#ff796a,#f6c94b)"><div>SITCOM BREAK</div><h1>FRIENDS: Thanksgiving</h1><p>Family plans, food and traditions</p></div>
+<div class="card">
+<h2>Watch the clip</h2>
+<div class="video"><iframe src="https://www.youtube.com/embed/gEKAzZEJIQY" title="Friends Thanksgiving clip" allowfullscreen></iframe></div>
+<p class="small">If the player does not load, open: <a href="https://www.youtube.com/watch?v=gEKAzZEJIQY" target="_blank">YouTube clip</a>.</p>
+</div>
+<div class="card">
+<h2>Task 1 – Watch once</h2><p>Tick all topics you notice.</p>
+<button class="choice multi" data-ok="1">Family plans for Thanksgiving</button>
+<button class="choice multi" data-ok="1">Special food / cooking</button>
+<button class="choice multi" data-ok="1">Different family traditions</button>
+<button class="choice multi">A school exam</button>
+<button class="choice multi" data-ok="1">Travel / going somewhere</button>
+<button class="choice multi">A new pet</button>
+<button class="check" onclick="checkMulti()">CHECK</button><div id="fbMulti" class="feedback"></div>
+</div>
+<div class="card">
+<h2>Task 2 – Watch again</h2>
+<p>1. Why does Monica end up talking about cooking Thanksgiving dinner?</p><textarea placeholder="Your answer..."></textarea>
+<p>2. What different wishes or traditions make the situation complicated?</p><textarea placeholder="Your answer..."></textarea>
+<p>3. Which character seems most enthusiastic about Thanksgiving? Why?</p><textarea placeholder="Your answer..."></textarea>
+<p>4. Are family traditions the same for everyone in this scene?</p><textarea placeholder="Your answer..."></textarea>
+</div>
+</section>
+
+<section id="finish">
+<div class="hero" style="background:linear-gradient(135deg,#37b9ad,#4f8fff)"><div>EXIT TICKET</div><h1>3 – 2 – 1</h1><p>Finish in your class chat.</p></div>
+<div class="grid three">
+<div class="card"><h2>3 words</h2><textarea placeholder="Three new words..."></textarea></div>
+<div class="card"><h2>2 facts</h2><textarea placeholder="Two facts from the recordings..."></textarea></div>
+<div class="card"><h2>1 opinion</h2><textarea placeholder="One opinion about a family problem..."></textarea></div>
+</div>
+</section>
+</main>
+<div class="score">⭐ <span id="score">0</span></div>
+<script>
+let score=0; function add(n){score+=n;document.getElementById('score').textContent=score}
+document.querySelectorAll('nav button').forEach(b=>b.onclick=()=>{document.querySelectorAll('nav button').forEach(x=>x.classList.remove('active'));b.classList.add('active');document.querySelectorAll('section').forEach(s=>s.classList.remove('active'));document.getElementById(b.dataset.go).classList.add('active');scrollTo(0,0)});
+document.querySelectorAll('.single').forEach(b=>b.onclick=()=>{document.querySelectorAll('[data-group="'+b.dataset.group+'"]').forEach(x=>x.classList.remove('selected'));b.classList.add('selected')});
+document.querySelectorAll('.multi').forEach(b=>b.onclick=()=>b.classList.toggle('selected'));
+function checkSingle(group,fb){const opts=[...document.querySelectorAll('[data-group="'+group+'"]')],sel=opts.find(x=>x.classList.contains('selected')),f=document.getElementById(fb);opts.forEach(x=>x.classList.remove('correct','wrong'));if(!sel){f.textContent='Choose an answer first.';f.className='feedback bad';return}if(sel.dataset.ok){sel.classList.add('correct');f.textContent='Correct!';f.className='feedback good';add(1)}else{sel.classList.add('wrong');f.textContent='Listen again.';f.className='feedback bad'}}
+function checkCallers(){const key={tony:'money',carol:'time',lucy:'worry'};let n=0;for(const id in key){const e=document.getElementById(id);if(e.value===key[id]){n++;e.style.borderColor='var(--green)'}else e.style.borderColor='var(--red)'}const f=document.getElementById('fbCallers');f.textContent=n+'/3 correct';f.className='feedback '+(n===3?'good':'bad');if(n===3)add(2)}
+function checkViews(){const a=[...document.querySelectorAll('#viewTable select')];let n=0;a.forEach(e=>{if(e.value===e.dataset.key){n++;e.style.borderColor='var(--green)'}else e.style.borderColor='var(--red)'});const f=document.getElementById('fbViews');f.textContent=n+'/'+a.length+' correct';f.className='feedback '+(n===a.length?'good':'bad');if(n===a.length)add(2)}
+function checkMulti(){const a=[...document.querySelectorAll('.multi')];let good=0,bad=0,total=a.filter(x=>x.dataset.ok).length;a.forEach(x=>{x.classList.remove('correct','wrong');if(x.classList.contains('selected')){if(x.dataset.ok){good++;x.classList.add('correct')}else{bad++;x.classList.add('wrong')}}});const f=document.getElementById('fbMulti');if(good===total&&bad===0){f.textContent='Great!';f.className='feedback good';add(2)}else{f.textContent='Watch again: some topics are missing or extra.';f.className='feedback bad'}}
+</script>
+</body>
+</html>
