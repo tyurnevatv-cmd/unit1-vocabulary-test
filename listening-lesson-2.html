@@ -42,7 +42,7 @@ table{width:100%;border-collapse:collapse}th,td{border:1px solid var(--border);p
 <div class="grid three">
 <div class="card"><h3>1. Details</h3><p>Family life after having a baby.</p><span class="tag">Track 8</span></div>
 <div class="card"><h3>2. Viewpoints</h3><p>A family disagreement about caring for a parent.</p><span class="tag">Tracks 9–10</span></div>
-<div class="card"><h3>3. Sitcom</h3><p>Family traditions in Friends.</p><span class="tag">Video</span></div>
+<div class="card"><h3>3. Sitcom</h3><p>Parents, criticism and sibling favouritism in Friends.</p><span class="tag">Video</span></div>
 </div>
 <div class="card"><h2>Warm-up</h2><p>What can change when a baby is born? Write three ideas in your class chat.</p></div>
 </section>
@@ -102,28 +102,84 @@ table{width:100%;border-collapse:collapse}th,td{border:1px solid var(--border);p
 </section>
 
 <section id="friends">
-<div class="hero" style="background:linear-gradient(135deg,#ff796a,#f6c94b)"><div>SITCOM BREAK</div><h1>FRIENDS: Thanksgiving</h1><p>Family plans, food and traditions</p></div>
-<div class="card">
-<h2>Watch the clip</h2>
-<div class="video"><iframe src="https://www.youtube.com/embed/gEKAzZEJIQY" title="Friends Thanksgiving clip" allowfullscreen></iframe></div>
-<p class="small">If the player does not load, open: <a href="https://www.youtube.com/watch?v=gEKAzZEJIQY" target="_blank">YouTube clip</a>.</p>
+<div class="hero" style="background:linear-gradient(135deg,#ff796a,#f6c94b)">
+  <div>SITCOM BREAK</div>
+  <h1>FRIENDS: Family Dinner</h1>
+  <p>Parents, criticism and sibling favouritism</p>
 </div>
+
 <div class="card">
-<h2>Task 1 – Watch once</h2><p>Tick all topics you notice.</p>
-<button class="choice multi" data-ok="1">Family plans for Thanksgiving</button>
-<button class="choice multi" data-ok="1">Special food / cooking</button>
-<button class="choice multi" data-ok="1">Different family traditions</button>
-<button class="choice multi">A school exam</button>
-<button class="choice multi" data-ok="1">Travel / going somewhere</button>
-<button class="choice multi">A new pet</button>
-<button class="check" onclick="checkMulti()">CHECK</button><div id="fbMulti" class="feedback"></div>
+  <h2>Before watching – Glossary</h2>
+  <p>Read the words and phrases first. They will help you understand the family dinner scene.</p>
+  <table>
+    <tr><th>Word / phrase</th><th>Meaning</th></tr>
+    <tr><td><strong>have a thing for someone</strong></td><td>to be romantically interested in someone</td></tr>
+    <tr><td><strong>graduate</strong></td><td>to finish university or college</td></tr>
+    <tr><td><strong>work in a restaurant</strong></td><td>to be employed by a restaurant, not to own it</td></tr>
+    <tr><td><strong>fluff the pillows</strong></td><td>to make cushions look fuller and neater</td></tr>
+    <tr><td><strong>take the heat off someone</strong></td><td>to make other people stop criticising or pressuring that person</td></tr>
+    <tr><td><strong>leave someone at the altar</strong></td><td>to decide not to marry someone at the last moment</td></tr>
+    <tr><td><strong>independent</strong></td><td>able to live and make decisions without relying on others</td></tr>
+    <tr><td><strong>chubby</strong></td><td>slightly overweight; a softer informal word</td></tr>
+    <tr><td><strong>shoot for the stars</strong></td><td>to aim for something very ambitious</td></tr>
+    <tr><td><strong>be content</strong></td><td>to be satisfied with what you have</td></tr>
+  </table>
 </div>
+
 <div class="card">
-<h2>Task 2 – Watch again</h2>
-<p>1. Why does Monica end up talking about cooking Thanksgiving dinner?</p><textarea placeholder="Your answer..."></textarea>
-<p>2. What different wishes or traditions make the situation complicated?</p><textarea placeholder="Your answer..."></textarea>
-<p>3. Which character seems most enthusiastic about Thanksgiving? Why?</p><textarea placeholder="Your answer..."></textarea>
-<p>4. Are family traditions the same for everyone in this scene?</p><textarea placeholder="Your answer..."></textarea>
+  <h2>Watch the clip</h2>
+  <p><strong>Friends, Season 1:</strong> Monica and Ross have dinner with their parents.</p>
+  <div class="video">
+    <iframe src="https://www.youtube.com/embed/ccpG3K_TuPM" title="Friends family dinner scene" allowfullscreen></iframe>
+  </div>
+  <p class="small">If the player does not load, open: <a href="https://www.youtube.com/watch?v=ccpG3K_TuPM" target="_blank">YouTube clip</a>.</p>
+</div>
+
+<div class="card">
+  <h2>Task 1 – Watch once: What is happening?</h2>
+  <p>Tick all the ideas that are true for the scene.</p>
+  <button class="choice multi" data-ok="1">Monica’s mother keeps criticising Monica.</button>
+  <button class="choice multi" data-ok="1">Ross receives noticeably more praise and approval.</button>
+  <button class="choice multi" data-ok="1">Monica wants Ross to reveal important news and take attention away from her.</button>
+  <button class="choice multi">The parents are angry because Monica forgot their anniversary.</button>
+  <button class="choice multi" data-ok="1">Even attempts to defend Monica can sound insulting.</button>
+  <button class="choice multi">Monica announces that she is moving to another country.</button>
+  <button class="check" onclick="checkMulti()">CHECK</button>
+  <div id="fbMulti" class="feedback"></div>
+</div>
+
+<div class="card">
+  <h2>Task 2 – Watch again: Listen for details</h2>
+
+  <p><strong>1. Why is Martha Ludwin’s daughter going to contact Monica?</strong></p>
+  <button class="choice single" data-group="f1" data-ok="1">She wants advice or help connected with a career in food/cooking.</button>
+  <button class="choice single" data-group="f1">She wants Monica to organise a wedding.</button>
+  <button class="choice single" data-group="f1">She wants to rent Monica’s apartment.</button>
+  <button class="check" onclick="checkSingle('f1','fbF1')">CHECK</button><div id="fbF1" class="feedback"></div>
+
+  <p><strong>2. What does Monica correct her mother about?</strong></p>
+  <button class="choice single" data-group="f2">She says she does not know Martha Ludwin.</button>
+  <button class="choice single" data-group="f2" data-ok="1">She works in a restaurant; she does not own one.</button>
+  <button class="choice single" data-group="f2">She says she cannot cook spaghetti.</button>
+  <button class="check" onclick="checkSingle('f2','fbF2')">CHECK</button><div id="fbF2" class="feedback"></div>
+
+  <p><strong>3. Why does Monica want Ross to tell their parents his news?</strong></p>
+  <button class="choice single" data-group="f3">She wants the family to celebrate Ross.</button>
+  <button class="choice single" data-group="f3" data-ok="1">She hopes the attention and criticism will move away from her.</button>
+  <button class="choice single" data-group="f3">She thinks their parents already know everything.</button>
+  <button class="check" onclick="checkSingle('f3','fbF3')">CHECK</button><div id="fbF3" class="feedback"></div>
+
+  <p><strong>4. What does the scene suggest about Monica and Ross’s family dynamic?</strong></p>
+  <button class="choice single" data-group="f4">The parents treat both children in exactly the same way.</button>
+  <button class="choice single" data-group="f4" data-ok="1">Ross is treated more favourably, while Monica is judged more critically.</button>
+  <button class="choice single" data-group="f4">Monica is clearly the favourite child.</button>
+  <button class="check" onclick="checkSingle('f4','fbF4')">CHECK</button><div id="fbF4" class="feedback"></div>
+</div>
+
+<div class="card">
+  <h2>Quick discussion</h2>
+  <p>Is Judy simply worried about Monica, or is she being unfair? Give one example from the scene.</p>
+  <textarea placeholder="I think Judy is ... because ..."></textarea>
 </div>
 </section>
 
