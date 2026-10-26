@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Listening Lesson 3 – Daily Activities</title>
+<style>
+:root{
+  --bg:#f6f8fc;--card:#fff;--ink:#263348;--muted:#6d7890;
+  --blue:#4f8fff;--teal:#37b9ad;--purple:#876fe0;--coral:#ff796a;
+  --yellow:#f6c94b;--green:#51b568;--red:#d94b4b;--border:#dfe5ee
+}
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial,sans-serif;background:linear-gradient(#f8fbff,#eef4fb);color:var(--ink)}
+nav{position:sticky;top:0;z-index:10;display:flex;gap:8px;overflow:auto;padding:10px;background:#fff;border-bottom:1px solid var(--border)}
+nav button{border:0;border-radius:999px;padding:9px 14px;font-weight:700;white-space:nowrap;cursor:pointer;background:#edf2f8;color:var(--ink)}
+nav button.active{background:var(--blue);color:#fff}
+main{max-width:1050px;margin:auto;padding:18px 14px 70px}
+section{display:none}section.active{display:block}
+.hero{padding:28px;border-radius:22px;color:#fff;background:linear-gradient(135deg,var(--blue),var(--purple));margin-bottom:18px;box-shadow:0 10px 28px rgba(35,55,85,.10)}
+.hero h1{margin:4px 0 8px;font-size:clamp(30px,6vw,50px)}.hero p{margin:0;font-size:18px}
+.card{background:var(--card);border:1px solid var(--border);border-radius:18px;padding:20px;margin:14px 0;box-shadow:0 10px 28px rgba(35,55,85,.08)}
+.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}.three{grid-template-columns:repeat(3,1fr)}
+.tag{display:inline-block;padding:6px 10px;border-radius:999px;font-size:12px;font-weight:800;background:#eaf2ff;color:#275da9;margin:0 5px 5px 0}
+.choice{display:block;width:100%;text-align:left;margin:8px 0;padding:12px;border:1px solid var(--border);border-radius:12px;background:#fff;cursor:pointer}
+.choice.selected{border-color:var(--blue);background:#eaf2ff}.choice.correct{border-color:var(--green);background:#edf9f0}.choice.wrong{border-color:var(--red);background:#fff0f0}
+button.check{border:0;border-radius:12px;padding:10px 14px;background:var(--blue);color:#fff;font-weight:800;cursor:pointer;margin-top:8px}
+button.secondary{background:#6d7890}
+.feedback{font-weight:800;margin-top:10px;min-height:22px}.good{color:var(--green)}.bad{color:var(--red)}
+table{width:100%;border-collapse:collapse}th,td{border:1px solid var(--border);padding:9px;vertical-align:top}th{background:#f3f6fa;text-align:left}
+select,textarea,input{width:100%;padding:10px;border:1px solid #cfd8e5;border-radius:10px;font:inherit}textarea{min-height:78px}
+.glossary td:first-child{font-weight:800}
+.note{padding:14px;border-radius:14px;background:#f7f2ff;border-left:5px solid var(--purple);margin:12px 0}
+.small{color:var(--muted);font-size:13px}
+.video{position:relative;padding-bottom:56.25%;height:0;overflow:hidden;border-radius:16px;background:#111;margin:12px 0 14px}
+.video iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.sequence-grid{display:grid;grid-template-columns:1.4fr .6fr;gap:10px;align-items:center}
+.compare-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.compare-card{padding:14px;border-radius:14px;background:#f8fbff;border:1px solid var(--border)}
+@media(max-width:760px){.compare-grid,.sequence-grid{grid-template-columns:1fr}}
+.score{position:fixed;right:14px;bottom:14px;background:#1f2b3d;color:#fff;padding:10px 14px;border-radius:14px;font-weight:800}
+.sprintbox{background:linear-gradient(135deg,#fff8dc,#fff);border:2px solid var(--yellow);border-radius:20px;padding:24px;text-align:center}
+.sprintprompt{font-size:clamp(28px,5vw,46px);font-weight:900;margin:18px 0}
+.sprintanswer{display:none;font-size:clamp(22px,4vw,34px);font-weight:900;color:var(--green);margin:14px 0}
+.sprintanswer.show{display:block}.sprinttimer{font-size:46px;font-weight:900;color:var(--purple);font-variant-numeric:tabular-nums}
+@media(max-width:760px){.grid,.three{grid-template-columns:1fr}.hero{padding:22px}}
+</style>
+</head>
+<body>
+<nav>
+<button class="active" data-go="start">START</button>
+<button data-go="u32">UNIT 3.2</button>
+<button data-go="u33">UNIT 3.3</button>
+<button data-go="zootopia">ZOOTOPIA</button>
+<button data-go="sprint">5-MIN SPRINT</button>
+<button data-go="finish">FINISH</button>
+</nav>
+
+<main>
+<section id="start" class="active">
+<div class="hero">
+  <div>LISTENING LESSON 3</div>
+  <h1>DAILY ACTIVITIES</h1>
+  <p>Listening Extra • Unit 3.2 + Unit 3.3 • no elementary level</p>
+</div>
+
+<div class="grid three">
+  <div class="card"><h3>1. Daily routine</h3><p>Jane Goodall: a typical day in Africa and in the UK.</p><span class="tag">3.2</span><span class="tag">Track 12</span><span class="tag">Intermediate</span></div>
+  <div class="card"><h3>2. Retreat timetable</h3><p>A spiritual retreat: activities, times and reactions.</p><span class="tag">3.3</span><span class="tag">Track 13</span><span class="tag">Upper-intermediate</span></div>
+  <div class="card"><h3>3. Animated listening</h3><p>Zootopia: Judy’s first working day, duties, targets and routine.</p><span class="tag">Disney</span><span class="tag">video</span></div>
+</div>
+
+<div class="card">
+  <h2>Warm-up – Which day sounds harder?</h2>
+  <p>Choose one and explain in the class chat:</p>
+  <button class="choice vote">A day following chimpanzees in a tropical forest</button>
+  <button class="choice vote">A day at a spiritual retreat with yoga and meditation</button>
+  <p class="small">There is no correct answer. Give one reason.</p>
+</div>
+</section>
+
+<section id="u32">
+<div class="hero" style="background:linear-gradient(135deg,#4f8fff,#37b9ad)">
+  <div>UNIT 3.2 • INTERMEDIATE</div>
+  <h1>A day in the life of…</h1>
+  <p>Jane Goodall • completing notes • listening for specific information • Track 12</p>
+</div>
+
+<div class="card">
+<h2>Before listening – Glossary</h2>
+<p class="small">All items below occur in the Unit 3.2 recording script.</p>
+<table class="glossary">
+<tr><th>Word / phrase</th><th>IPA</th><th>Russian</th></tr>
+<tr><td>typical day</td><td>/ˈtɪpɪkəl deɪ/</td><td>обычный, типичный день</td></tr>
+<tr><td>get up</td><td>/ˌɡet ˈʌp/</td><td>вставать</td></tr>
+<tr><td>follow the chimps</td><td>/ˌfɒləʊ ðə ˈtʃɪmps/</td><td>следовать за шимпанзе, наблюдать за ними</td></tr>
+<tr><td>crawl through the jungle</td><td>/ˌkrɔːl θruː ðə ˈdʒʌŋɡəl/</td><td>пробираться ползком через джунгли</td></tr>
+<tr><td>end up</td><td>/ˌend ˈʌp/</td><td>в итоге оказаться где-либо</td></tr>
+<tr><td>tiredness</td><td>/ˈtaɪədnəs/</td><td>усталость</td></tr>
+<tr><td>over an open fire</td><td>/ˌəʊvər ən ˌəʊpən ˈfaɪə/</td><td>на открытом огне, на костре</td></tr>
+<tr><td>reply to letters</td><td>/rɪˌplaɪ tə ˈletəz/</td><td>отвечать на письма</td></tr>
+</table>
+</div>
+
+<div class="card">
+<h2>Task 1 – First listening: the big picture</h2>
+<p>What is the interview mainly about?</p>
+<button class="choice single" data-group="u32gist" data-ok="1">Jane Goodall describes a typical working day and compares life in Africa with life in the UK.</button>
+<button class="choice single" data-group="u32gist">Jane Goodall explains how to become a university professor.</button>
+<button class="choice single" data-group="u32gist">Jane Goodall talks only about what chimpanzees eat.</button>
+<button class="check" onclick="checkSingle('u32gist','fb32gist')">CHECK</button>
+<div id="fb32gist" class="feedback"></div>
+</div>
+
+<div class="card">
+<h2>Task 2 – Listen again: Africa or UK?</h2>
+<p>Choose where each activity belongs.</p>
+<table id="africaUk">
+<tr><th>Activity</th><th>Place</th></tr>
+<tr><td>follows chimpanzees in the forest</td><td><select data-key="africa"><option value="">Choose…</option><option value="africa">Africa</option><option value="uk">UK</option></select></td></tr>
+<tr><td>swims in Lake Tanganyika</td><td><select data-key="africa"><option value="">Choose…</option><option value="africa">Africa</option><option value="uk">UK</option></select></td></tr>
+<tr><td>cooks dinner over an open fire</td><td><select data-key="africa"><option value="">Choose…</option><option value="africa">Africa</option><option value="uk">UK</option></select></td></tr>
+<tr><td>replies to many letters</td><td><select data-key="uk"><option value="">Choose…</option><option value="africa">Africa</option><option value="uk">UK</option></select></td></tr>
+<tr><td>has tea with her family</td><td><select data-key="uk"><option value="">Choose…</option><option value="africa">Africa</option><option value="uk">UK</option></select></td></tr>
+<tr><td>goes for a walk with her dog</td><td><select data-key="uk"><option value="">Choose…</option><option value="africa">Africa</option><option value="uk">UK</option></select></td></tr>
+</table>
+<button class="check" onclick="checkTable('africaUk','fbAfricaUk')">CHECK</button>
+<div id="fbAfricaUk" class="feedback"></div>
+</div>
+
+<div class="card">
+<h2>Task 3 – Listen for details</h2>
+<p>Choose the detail you hear.</p>
+
+<p><strong>1. What does she have with breakfast in Africa?</strong></p>
+<button class="choice single" data-group="u32d1" data-ok="1">bread and coffee</button>
+<button class="choice single" data-group="u32d1">eggs and tea</button>
+<button class="choice single" data-group="u32d1">fruit and milk</button>
+<button class="check" onclick="checkSingle('u32d1','fb32d1')">CHECK</button><div id="fb32d1" class="feedback"></div>
+
+<p><strong>2. What does she usually have for lunch while following the chimps?</strong></p>
+<button class="choice single" data-group="u32d2" data-ok="1">nothing</button>
+<button class="choice single" data-group="u32d2">sandwiches</button>
+<button class="choice single" data-group="u32d2">rice and vegetables</button>
+<button class="check" onclick="checkSingle('u32d2','fb32d2')">CHECK</button><div id="fb32d2" class="feedback"></div>
+
+<p><strong>3. In the UK, whose letters does she especially reply to?</strong></p>
+<button class="choice single" data-group="u32d3">journalists</button>
+<button class="choice single" data-group="u32d3" data-ok="1">children</button>
+<button class="choice single" data-group="u32d3">scientists only</button>
+<button class="check" onclick="checkSingle('u32d3','fb32d3')">CHECK</button><div id="fb32d3" class="feedback"></div>
+</div>
+
+<div class="card">
+<h2>Task 4 – Put the UK routine in order</h2>
+<p>Number the events from 1 to 4.</p>
+<table id="routineOrder">
+<tr><th>Event</th><th>Order</th></tr>
+<tr><td>She has tea with her family.</td><td><select data-key="2"><option value="">—</option><option>1</option><option>2</option><option>3</option><option>4</option></select></td></tr>
+<tr><td>She replies to letters.</td><td><select data-key="1"><option value="">—</option><option>1</option><option>2</option><option>3</option><option>4</option></select></td></tr>
+<tr><td>She goes for a walk with her dog.</td><td><select data-key="3"><option value="">—</option><option>1</option><option>2</option><option>3</option><option>4</option></select></td></tr>
+<tr><td>After supper, she goes back to work.</td><td><select data-key="4"><option value="">—</option><option>1</option><option>2</option><option>3</option><option>4</option></select></td></tr>
+</table>
+<button class="check" onclick="checkTable('routineOrder','fbRoutine')">CHECK</button>
+<div id="fbRoutine" class="feedback"></div>
+</div>
+
+<div class="card">
+<h2>Quick chat</h2>
+<p>Which of Jane Goodall’s two routines would you prefer: Africa or the UK? Give one reason.</p>
+<textarea placeholder="I would prefer ... because ..."></textarea>
+</div>
+</section>
+
+<section id="u33">
+<div class="hero" style="background:linear-gradient(135deg,#876fe0,#ff796a)">
+  <div>UNIT 3.3 • UPPER-INTERMEDIATE</div>
+  <h1>Time to refresh your soul</h1>
+  <p>Spiritual retreat • ordering pictures • timetable • attitudes • Track 13</p>
+</div>
+
+<div class="card">
+<h2>Before listening – Glossary</h2>
+<p class="small">All items below occur in the Unit 3.3 recording script.</p>
+<table class="glossary">
+<tr><th>Word / phrase</th><th>IPA</th><th>Russian</th></tr>
+<tr><td>miss breakfast</td><td>/ˌmɪs ˈbrekfəst/</td><td>пропустить завтрак</td></tr>
+<tr><td>Do you fancy joining us?</td><td>/də juː ˌfænsi ˈdʒɔɪnɪŋ əs/</td><td>Не хотите присоединиться к нам?</td></tr>
+<tr><td>You must be kidding!</td><td>/juː məs bi ˈkɪdɪŋ/</td><td>Вы, должно быть, шутите!</td></tr>
+<tr><td>freezing</td><td>/ˈfriːzɪŋ/</td><td>очень холодный, ледяной</td></tr>
+<tr><td>refresh your soul</td><td>/rɪˌfreʃ jə ˈsəʊl/</td><td>освежить душу, восстановиться духовно</td></tr>
+<tr><td>morning prayers</td><td>/ˌmɔːnɪŋ ˈpreəz/</td><td>утренние молитвы</td></tr>
+<tr><td>chant together</td><td>/ˌtʃɑːnt təˈɡeðə/</td><td>петь / произносить хором</td></tr>
+<tr><td>meditate together</td><td>/ˈmedɪteɪt təˌɡeðə/</td><td>медитировать вместе</td></tr>
+</table>
+</div>
+
+<div class="card">
+<h2>Task 1 – First listening: Where are they?</h2>
+<p>What is the woman doing?</p>
+<button class="choice single" data-group="u33gist" data-ok="1">She is staying at a spiritual retreat and checking the day’s programme.</button>
+<button class="choice single" data-group="u33gist">She is booking a beach holiday at a travel agency.</button>
+<button class="choice single" data-group="u33gist">She is interviewing for a new job.</button>
+<button class="check" onclick="checkSingle('u33gist','fb33gist')">CHECK</button>
+<div id="fb33gist" class="feedback"></div>
+</div>
+
+<div class="card">
+<h2>Task 2 – Build the timetable</h2>
+<p>Listen again and match the activity to the time.</p>
+<table id="retreatTimes">
+<tr><th>Activity</th><th>Time</th></tr>
+<tr><td>morning prayers / chanting</td><td><select data-key="630"><option value="">Choose…</option><option value="630">6:30–7:00</option><option value="700">7:00–8:00</option><option value="1000">10:00–12:00</option><option value="100">1:00–2:00</option></select></td></tr>
+<tr><td>yoga</td><td><select data-key="700"><option value="">Choose…</option><option value="630">6:30–7:00</option><option value="700">7:00–8:00</option><option value="1000">10:00–12:00</option><option value="100">1:00–2:00</option></select></td></tr>
+<tr><td>meditation</td><td><select data-key="1000"><option value="">Choose…</option><option value="630">6:30–7:00</option><option value="700">7:00–8:00</option><option value="1000">10:00–12:00</option><option value="100">1:00–2:00</option></select></td></tr>
+<tr><td>special dance among the trees</td><td><select data-key="100"><option value="">Choose…</option><option value="630">6:30–7:00</option><option value="700">7:00–8:00</option><option value="1000">10:00–12:00</option><option value="100">1:00–2:00</option></select></td></tr>
+</table>
+<button class="check" onclick="checkTable('retreatTimes','fbRetreatTimes')">CHECK</button>
+<div id="fbRetreatTimes" class="feedback"></div>
+</div>
+
+<div class="card">
+<h2>Task 3 – What does the woman think?</h2>
+<p>Choose the best answer.</p>
+
+<p><strong>1. Swimming in the lake in December:</strong></p>
+<button class="choice single" data-group="u33a1">She is excited about it.</button>
+<button class="choice single" data-group="u33a1" data-ok="1">She refuses because she thinks it is too cold.</button>
+<button class="choice single" data-group="u33a1">She has already done it twice.</button>
+<button class="check" onclick="checkSingle('u33a1','fb33a1')">CHECK</button><div id="fb33a1" class="feedback"></div>
+
+<p><strong>2. Why did she come to the retreat?</strong></p>
+<button class="choice single" data-group="u33a2" data-ok="1">To escape her problems for a week and relax.</button>
+<button class="choice single" data-group="u33a2">To train for a sports competition.</button>
+<button class="choice single" data-group="u33a2">To learn how to cook.</button>
+<button class="check" onclick="checkSingle('u33a2','fb33a2')">CHECK</button><div id="fb33a2" class="feedback"></div>
+
+<p><strong>3. How does she react to the special dance?</strong></p>
+<button class="choice single" data-group="u33a3">She says it is exactly what she wanted.</button>
+<button class="choice single" data-group="u33a3" data-ok="1">She is doubtful and says it does not really sound like her kind of activity.</button>
+<button class="choice single" data-group="u33a3">She refuses to listen to the explanation.</button>
+<button class="check" onclick="checkSingle('u33a3','fb33a3')">CHECK</button><div id="fb33a3" class="feedback"></div>
+</div>
+
+<div class="card">
+<h2>Task 4 – Which activities would YOU do?</h2>
+<p>Choose two and explain in the class chat.</p>
+<div class="grid">
+  <button class="choice personal">morning chanting</button>
+  <button class="choice personal">yoga</button>
+  <button class="choice personal">meditation</button>
+  <button class="choice personal">swimming in a cold lake</button>
+  <button class="choice personal">creative painting</button>
+  <button class="choice personal">dance among the trees</button>
+</div>
+<p class="small">Sentence starter: “I would choose … because …”</p>
+</div>
+</section>
+
+
+<section id="zootopia">
+<div class="hero" style="background:linear-gradient(135deg,#4a9e65,#4f8fff)">
+  <div>ANIMATED LISTENING • DISNEY</div>
+  <h1>Zootopia – Judy’s First Day at Work</h1>
+  <p>Work routine • duties • targets • numbers • attitude</p>
+</div>
+
+<div class="card">
+<h2>Before watching – Glossary</h2>
+<p class="small">These words and phrases come from the script of the selected first-day-at-work scene.</p>
+<table class="glossary">
+<tr><th>Word / phrase</th><th>IPA</th><th>Russian</th></tr>
+<tr><td>assignments</td><td>/əˈsaɪnmənts/</td><td>задания, распределение обязанностей</td></tr>
+<tr><td>parking duty</td><td>/ˈpɑːkɪŋ ˌdjuːti/</td><td>дежурство по контролю парковки</td></tr>
+<tr><td>handle a case</td><td>/ˌhændl ə ˈkeɪs/</td><td>взяться за дело, вести дело</td></tr>
+<tr><td>top of my class</td><td>/ˌtɒp əv maɪ ˈklɑːs/</td><td>лучший / лучшая в своей группе</td></tr>
+<tr><td>academy</td><td>/əˈkædəmi/</td><td>академия</td></tr>
+<tr><td>token bunny</td><td>/ˌtəʊkən ˈbʌni/</td><td>«кролик для галочки», символический представитель</td></tr>
+<tr><td>write tickets</td><td>/ˌraɪt ˈtɪkɪts/</td><td>выписывать штрафы</td></tr>
+<tr><td>before noon</td><td>/bɪˌfɔː ˈnuːn/</td><td>до полудня</td></tr>
+</table>
+</div>
+
+<div class="card">
+<h2>Watch the clip</h2>
+<p><strong>Zootopia – Judy’s First Day at Work</strong></p>
+<div class="video">
+  <iframe src="https://www.youtube.com/embed/7IQ2dCkpMJE" title="Zootopia - Judy's First Day at Work" allowfullscreen></iframe>
+</div>
+<p class="small">If YouTube is unavailable, the same tasks can be used with a locally downloaded copy of this clip.</p>
+</div>
+
+<div class="card">
+<h2>Task 1 – First watch: Judy’s problem</h2>
+<p>Why is Judy disappointed at the beginning of the scene?</p>
+<button class="choice single" data-group="zoogist">She is late for work.</button>
+<button class="choice single" data-group="zoogist" data-ok="1">She wants a real police case but is assigned parking duty.</button>
+<button class="choice single" data-group="zoogist">She has forgotten her uniform.</button>
+<button class="check" onclick="checkSingle('zoogist','fbZooGist')">CHECK</button>
+<div id="fbZooGist" class="feedback"></div>
+</div>
+
+<div class="card">
+<h2>Task 2 – Number hunt</h2>
+<p>Listen carefully for numbers and targets.</p>
+
+<p><strong>1. How many missing mammal cases does Judy mention?</strong></p>
+<button class="choice single" data-group="z1">4</button>
+<button class="choice single" data-group="z1" data-ok="1">14</button>
+<button class="choice single" data-group="z1">40</button>
+<button class="check" onclick="checkSingle('z1','fbZ1')">CHECK</button><div id="fbZ1" class="feedback"></div>
+
+<p><strong>2. How many tickets does Chief Bogo expect in a day?</strong></p>
+<button class="choice single" data-group="z2" data-ok="1">100</button>
+<button class="choice single" data-group="z2">150</button>
+<button class="choice single" data-group="z2">200</button>
+<button class="check" onclick="checkSingle('z2','fbZ2')">CHECK</button><div id="fbZ2" class="feedback"></div>
+
+<p><strong>3. What target does Judy set herself?</strong></p>
+<button class="choice single" data-group="z3">100 tickets before lunch</button>
+<button class="choice single" data-group="z3" data-ok="1">200 tickets before noon</button>
+<button class="choice single" data-group="z3">200 tickets by the end of the day</button>
+<button class="check" onclick="checkSingle('z3','fbZ3')">CHECK</button><div id="fbZ3" class="feedback"></div>
+</div>
+
+<div class="card">
+<h2>Task 3 – Put Judy’s workday in order</h2>
+<table id="zooSequence">
+<tr><th>Event</th><th>Order</th></tr>
+<tr><td>Chief Bogo gives the officers their assignments.</td><td><select data-key="1"><option value="">—</option><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option></select></td></tr>
+<tr><td>Judy asks to handle one of the missing-mammal cases.</td><td><select data-key="2"><option value="">—</option><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option></select></td></tr>
+<tr><td>Bogo tells her to write parking tickets.</td><td><select data-key="3"><option value="">—</option><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option></select></td></tr>
+<tr><td>Judy decides to double the target.</td><td><select data-key="4"><option value="">—</option><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option></select></td></tr>
+<tr><td>She reaches 200 tickets before noon.</td><td><select data-key="5"><option value="">—</option><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option></select></td></tr>
+</table>
+<button class="check" onclick="checkTable('zooSequence','fbZooSequence')">CHECK</button>
+<div id="fbZooSequence" class="feedback"></div>
+</div>
+
+<div class="card">
+<h2>Task 4 – What does this tell us about Judy?</h2>
+<p>Choose TWO qualities that fit her best in this scene.</p>
+<button class="choice zoomulti" data-ok="1">determined</button>
+<button class="choice zoomulti" data-ok="1">ambitious</button>
+<button class="choice zoomulti">lazy</button>
+<button class="choice zoomulti">indifferent</button>
+<button class="choice zoomulti">easily discouraged</button>
+<button class="check" onclick="checkZooMulti()">CHECK</button>
+<div id="fbZooMulti" class="feedback"></div>
+</div>
+
+<div class="card">
+<h2>Task 5 – Three routines, one comparison</h2>
+<p>Who fits each description best?</p>
+<table id="threeCompare">
+<tr><th>Description</th><th>Best match</th></tr>
+<tr><td>works outdoors and follows animals</td><td><select data-key="jane"><option value="">Choose…</option><option value="jane">Jane Goodall</option><option value="retreat">Retreat visitor</option><option value="judy">Judy Hopps</option></select></td></tr>
+<tr><td>follows a timetable of meditation and spiritual activities</td><td><select data-key="retreat"><option value="">Choose…</option><option value="jane">Jane Goodall</option><option value="retreat">Retreat visitor</option><option value="judy">Judy Hopps</option></select></td></tr>
+<tr><td>has a numerical target at work</td><td><select data-key="judy"><option value="">Choose…</option><option value="jane">Jane Goodall</option><option value="retreat">Retreat visitor</option><option value="judy">Judy Hopps</option></select></td></tr>
+<tr><td>has a routine that changes depending on the country</td><td><select data-key="jane"><option value="">Choose…</option><option value="jane">Jane Goodall</option><option value="retreat">Retreat visitor</option><option value="judy">Judy Hopps</option></select></td></tr>
+<tr><td>initially dislikes part of the assigned programme</td><td><select data-key="retreat"><option value="">Choose…</option><option value="jane">Jane Goodall</option><option value="retreat">Retreat visitor</option><option value="judy">Judy Hopps</option></select></td></tr>
+</table>
+<button class="check" onclick="checkTable('threeCompare','fbThreeCompare')">CHECK</button>
+<div id="fbThreeCompare" class="feedback"></div>
+</div>
+
+<div class="card">
+<h2>Fast chat – 30 seconds</h2>
+<p>Whose day would you choose: <strong>Jane Goodall’s</strong>, <strong>the retreat visitor’s</strong>, or <strong>Judy Hopps’s</strong>? Give one reason.</p>
+<textarea placeholder="I would choose ... because ..."></textarea>
+</div>
+</section>
+
+<section id="sprint">
+<div class="hero" style="background:linear-gradient(135deg,#f6c94b,#ff796a)">
+  <div>5-MINUTE CHAT CHALLENGE</div>
+  <h1>RUSSIAN → ENGLISH</h1>
+  <p>The same 24 words and phrases from Unit 3.2 + Unit 3.3 + Zootopia.</p>
+</div>
+
+<div class="card">
+<p><strong>Rules:</strong> 15–20 seconds per prompt. Spelling counts. First correct answer gets 1 point.</p>
+</div>
+
+<div class="sprintbox">
+  <div class="sprinttimer" id="sprintTimer">05:00</div>
+  <div class="small" id="sprintCount">Prompt 1 of 12</div>
+  <div class="sprintprompt" id="sprintPrompt">тропический лес</div>
+  <div class="sprintanswer" id="sprintAnswer">tropical forest</div>
+  <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap">
+    <button class="check" onclick="startSprintTimer()">START 5 MIN</button>
+    <button class="check" style="background:#876fe0" onclick="revealSprint()">SHOW ANSWER</button>
+    <button class="check" style="background:#37b9ad" onclick="nextSprint()">NEXT</button>
+    <button class="check secondary" onclick="resetSprint()">RESET</button>
+  </div>
+</div>
+</section>
+
+<section id="finish">
+<div class="hero" style="background:linear-gradient(135deg,#37b9ad,#4f8fff)">
+  <div>EXIT TICKET</div>
+  <h1>3 – 2 – 1</h1>
+  <p>One final message in the class chat.</p>
+</div>
+<div class="grid three">
+<div class="card"><h2>3 words</h2><textarea placeholder="Three new words..."></textarea></div>
+<div class="card"><h2>2 facts</h2><textarea placeholder="Two facts from today's recordings..."></textarea></div>
+<div class="card"><h2>1 choice</h2><textarea placeholder="Which lifestyle would you choose: Jane Goodall's field day or the retreat? Why?"></textarea></div>
+</div>
+</section>
+</main>
+
+<div class="score">⭐ <span id="score">0</span></div>
+
+<script>
+let score=0;
+function add(n){score+=n;document.getElementById('score').textContent=score}
+
+document.querySelectorAll('nav button').forEach(b=>b.onclick=()=>{
+  document.querySelectorAll('nav button').forEach(x=>x.classList.remove('active'));
+  b.classList.add('active');
+  document.querySelectorAll('section').forEach(s=>s.classList.remove('active'));
+  document.getElementById(b.dataset.go).classList.add('active');
+  scrollTo(0,0);
+});
+
+document.querySelectorAll('.vote').forEach(b=>b.onclick=()=>{
+  document.querySelectorAll('.vote').forEach(x=>x.classList.remove('selected')); b.classList.add('selected');
+});
+document.querySelectorAll('.personal').forEach(b=>b.onclick=()=>{
+  const all=[...document.querySelectorAll('.personal')];
+  if(!b.classList.contains('selected') && all.filter(x=>x.classList.contains('selected')).length>=2)return;
+  b.classList.toggle('selected');
+});
+document.querySelectorAll('.zoomulti').forEach(b=>b.onclick=()=>b.classList.toggle('selected'));
+document.querySelectorAll('.single').forEach(b=>b.onclick=()=>{
+  document.querySelectorAll('[data-group="'+b.dataset.group+'"]').forEach(x=>x.classList.remove('selected'));
+  b.classList.add('selected');
+});
+
+function checkSingle(group,fb){
+  const opts=[...document.querySelectorAll('[data-group="'+group+'"]')];
+  const sel=opts.find(x=>x.classList.contains('selected'));
+  const f=document.getElementById(fb);
+  opts.forEach(x=>x.classList.remove('correct','wrong'));
+  if(!sel){f.textContent='Choose an answer first.';f.className='feedback bad';return}
+  if(sel.dataset.ok){sel.classList.add('correct');f.textContent='Correct!';f.className='feedback good';add(1)}
+  else{sel.classList.add('wrong');f.textContent='Listen again.';f.className='feedback bad'}
+}
+
+function checkZooMulti(){
+  const items=[...document.querySelectorAll('.zoomulti')];
+  let good=0,bad=0,total=items.filter(x=>x.dataset.ok).length;
+  items.forEach(x=>{
+    x.classList.remove('correct','wrong');
+    if(x.classList.contains('selected')){
+      if(x.dataset.ok){good++;x.classList.add('correct')}
+      else{bad++;x.classList.add('wrong')}
+    }
+  });
+  const f=document.getElementById('fbZooMulti');
+  if(good===total&&bad===0){f.textContent='Excellent!';f.className='feedback good';add(2)}
+  else{f.textContent='Choose exactly the two qualities that best match Judy in this scene.';f.className='feedback bad'}
+}
+function checkTable(id,fb){
+  const sels=[...document.querySelectorAll('#'+id+' select')];
+  let n=0;
+  sels.forEach(s=>{
+    if(s.value===s.dataset.key){n++;s.style.borderColor='var(--green)'}
+    else{s.style.borderColor='var(--red)'}
+  });
+  const f=document.getElementById(fb);
+  f.textContent=n+'/'+sels.length+' correct';
+  f.className='feedback '+(n===sels.length?'good':'bad');
+  if(n===sels.length)add(2);
+}
+
+const sprintItems=[
+  {ru:'обычный, типичный день',en:'typical day'},
+  {ru:'вставать',en:'get up'},
+  {ru:'следовать за шимпанзе / наблюдать за ними',en:'follow the chimps'},
+  {ru:'пробираться ползком через джунгли',en:'crawl through the jungle'},
+  {ru:'в итоге оказаться где-либо',en:'end up'},
+  {ru:'усталость',en:'tiredness'},
+  {ru:'на открытом огне / на костре',en:'over an open fire'},
+  {ru:'отвечать на письма',en:'reply to letters'},
+  {ru:'пропустить завтрак',en:'miss breakfast'},
+  {ru:'Не хотите присоединиться к нам?',en:'Do you fancy joining us?'},
+  {ru:'Вы, должно быть, шутите!',en:'You must be kidding!'},
+  {ru:'очень холодный / ледяной',en:'freezing'},
+  {ru:'освежить душу / восстановиться духовно',en:'refresh your soul'},
+  {ru:'утренние молитвы',en:'morning prayers'},
+  {ru:'петь / произносить хором',en:'chant together'},
+  {ru:'медитировать вместе',en:'meditate together'},
+  {ru:'задания / распределение обязанностей',en:'assignments'},
+  {ru:'дежурство по контролю парковки',en:'parking duty'},
+  {ru:'взяться за дело / вести дело',en:'handle a case'},
+  {ru:'лучший / лучшая в своей группе',en:'top of my class'},
+  {ru:'академия',en:'academy'},
+  {ru:'«кролик для галочки»',en:'token bunny'},
+  {ru:'выписывать штрафы',en:'write tickets'},
+  {ru:'до полудня',en:'before noon'}
+];
+let sprintIndex=0,sprintInterval=null,sprintLeft=300;
+function paintSprint(){
+  document.getElementById('sprintPrompt').textContent=sprintItems[sprintIndex].ru;
+  document.getElementById('sprintAnswer').textContent=sprintItems[sprintIndex].en;
+  document.getElementById('sprintAnswer').classList.remove('show');
+  document.getElementById('sprintCount').textContent='Prompt '+(sprintIndex+1)+' of '+sprintItems.length;
+}
+function revealSprint(){document.getElementById('sprintAnswer').classList.add('show')}
+function nextSprint(){sprintIndex=(sprintIndex+1)%sprintItems.length;paintSprint()}
+function resetSprint(){
+  sprintIndex=0;sprintLeft=300;
+  if(sprintInterval)clearInterval(sprintInterval);sprintInterval=null;
+  document.getElementById('sprintTimer').textContent='05:00';
+  paintSprint();
+}
+function startSprintTimer(){
+  if(sprintInterval)clearInterval(sprintInterval);
+  sprintLeft=300;
+  const el=document.getElementById('sprintTimer');
+  const tick=()=>{
+    const m=String(Math.floor(sprintLeft/60)).padStart(2,'0');
+    const s=String(sprintLeft%60).padStart(2,'0');
+    el.textContent=m+':'+s;
+    if(sprintLeft<=0){clearInterval(sprintInterval);sprintInterval=null;el.textContent='TIME!';return}
+    sprintLeft--;
+  };
+  tick();sprintInterval=setInterval(tick,1000);
+}
+paintSprint();
+</script>
+</body>
+</html>
