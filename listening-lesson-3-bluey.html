@@ -44,6 +44,24 @@ select,textarea,input{width:100%;padding:10px;border:1px solid #cfd8e5;border-ra
 .sprintanswer{display:none;font-size:clamp(22px,4vw,34px);font-weight:900;color:var(--green);margin:14px 0}
 .sprintanswer.show{display:block}.sprinttimer{font-size:46px;font-weight:900;color:var(--purple);font-variant-numeric:tabular-nums}
 @media(max-width:760px){.grid,.three{grid-template-columns:1fr}.hero{padding:22px}}
+
+.cloud-presenter{border:1px solid var(--border);border-radius:20px;overflow:hidden;background:#fff;box-shadow:0 10px 28px rgba(35,55,85,.08)}
+.cloud-header{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;padding:16px 20px;background:#f5f8ff}
+.cloud-header h2{margin:0}
+.cloud-screen{aspect-ratio:16/9;min-height:380px;background:linear-gradient(135deg,#eaf2ff,#f7f1ff);position:relative;display:flex;align-items:center;justify-content:center;text-align:center}
+.cloud-screen iframe{display:none;position:absolute;inset:0;width:100%;height:100%;border:0;background:#fff}
+.cloud-screen iframe.ready{display:block}
+.cloud-setup{max-width:740px;margin:auto;padding:20px}
+.cloud-setup label{display:block;font-weight:bold;margin-bottom:6px}
+.cloud-setup input{display:block;width:100%;padding:12px;border-radius:10px;border:1px solid #cfd8e5}
+.cloud-actions{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-top:12px}
+.cloud-actions button{cursor:pointer}
+.cloud-actions a{color:#245fbf;font-weight:bold}
+.cloud-joining{display:flex;align-items:center;justify-content:center;gap:20px;flex-wrap:wrap;padding:15px;text-align:left}
+.cloud-joining img{width:132px;height:132px;object-fit:contain;padding:4px;background:#fff;border:1px solid #dae2ef;border-radius:8px;image-rendering:pixelated}
+.cloud-help{font-size:13px;color:#69758c}
+@media(max-width:760px){.cloud-screen{min-height:440px;aspect-ratio:auto}.cloud-joining{text-align:center}}
+
 </style>
 </head>
 <body>
@@ -373,28 +391,39 @@ select,textarea,input{width:100%;padding:10px;border:1px solid #cfd8e5;border-ra
 <section id="wordcloud">
 <div class="hero" style="background:linear-gradient(135deg,#f6c94b,#ff796a)">
   <div>FINAL VOCABULARY ACTIVITY</div>
-  <h1>WORD CLOUD</h1>
-  <p>Vocabulary from Unit 3.2 + Unit 3.3 + Bluey</p>
+  <h1>LIVE WORD CLOUD</h1>
+  <p>What words and phrases from today's three listenings do you remember?</p>
 </div>
 
-<div class="card">
-<h2>What do you remember?</h2>
-<p><strong>Type 3–5 English words or phrases</strong> from today’s three listenings.</p>
-<p>Try to include vocabulary from:</p>
-<div class="grid three">
-  <div class="card"><strong>Unit 3.2</strong><br>Jane Goodall</div>
-  <div class="card"><strong>Unit 3.3</strong><br>Spiritual retreat</div>
-  <div class="card"><strong>Bluey</strong><br>Sticky Gecko</div>
-</div>
-<p class="small">One word or phrase per response. English only. Repeated answers will appear larger in the cloud.</p>
+<div class="cloud-presenter">
+  <div class="cloud-header">
+    <h2>Live results from AhaSlides</h2>
+    <button class="check secondary" type="button" onclick="showCloudSettings()">SET UP / CHANGE LINK</button>
+  </div>
+  <div class="cloud-screen" id="cloudScreen">
+    <div class="cloud-setup" id="cloudSetup">
+      <h2>Show the live word cloud here</h2>
+      <p>Teacher: in AhaSlides, open presentation 10465305, then go to <strong>Share → Embed → Present from another app</strong>. Copy the presenter link and paste it here once.</p>
+      <label for="cloudPresenterLink">AhaSlides presenter embed link</label>
+      <input id="cloudPresenterLink" type="url" placeholder="https://presenter.ahaslides.com/..." autocomplete="off">
+      <div class="cloud-actions">
+        <button type="button" class="check" onclick="showLiveCloud()">SHOW LIVE RESULTS</button>
+        <a href="https://presenter.ahaslides.com/presentation/10465305" target="_blank" rel="noopener">OPEN MY AHASLIDES PRESENTATION</a>
+      </div>
+      <p id="cloudError" class="feedback bad" role="alert"></p>
+      <p class="cloud-help">The link is saved only in this browser. Click Start presenting inside the embedded AhaSlides view. Do not paste the participant link (O241N) here.</p>
+    </div>
+    <iframe id="cloudPresenterFrame" title="Live AhaSlides Word Cloud results" allow="fullscreen; autoplay; clipboard-write" allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe>
+  </div>
 </div>
 
-<div class="card" style="text-align:center">
-<h2>Join the Word Cloud</h2>
-<p>Scan the QR code or open the link below:</p>
-<p><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAUAAAAFAAQAAAADl65gHAAADHUlEQVR42u2aQY6jPBSEv9fOyL1z38C5iXMzyMl+5yZwA7IjkkPNwpD+d6ElRiON7E0k5y2gZMpV9Z6JfeuDv1bIVH+sPmvKRE1h8lJxi0nbK8S/+Iz/VCGTl6QN26RM1ISfcQUTopOkoQH+tvBhdgLMJGVg/Aq6f7qHX2QCrmaXdh6PL5SA24Wo8ese5ufp6SRr8Py00IyrXW4Xxq97vIeCW0ANnh8TKZJyylFTkGZXaET6Z6WC6PqU0xCnMPnZFbeYaFJhZ2GQJGkBZP26G2ZwBRnUvzU0HA86uJKkQmWKniQNoW456X+nueH4jnFnV5wWgK5PmThAmH1xpaLcA0lqOL47j/M3kUrKUVOY8CqrvOok5UakxwE+gyu28C0V6nqZ3C6nJhV2KIDtWwc6ZeIQpNmrbESqnNQI4DipMMPTa8EAbl0mjmafjxPPDxkm69O1mdx9CqAqLqlPGQhT0AxO1XR1OTXG3WUBXNmEFEkaCKsRA6gKoBHpsYxbDy50GeIQNHlJKw13fcrNc+0ofPiHuQVQf72kDNzj3U7Pky2YZMqk5rmOKjzh56cvJyeDjv/yDQhj0NOXX4BBB4yp4biDcev1tQZaBL0ursq47ebapwC2YLDK1AHwsyuYtj5X867HFd7NzBd7mozOLjXkmh6fzxMyM9STlBuObwu9VJDTqgBuZ4C6CzKTMjc7NxyPY4oCtlTTkEmrxn1t9l1OOTameE8AJ1f0AWtvcDyH8ethvtIwph4Y28F9W+i1eoCtW3CP0ozTIrPaQ2jS9UDJ5WdX2wWCTsrEqRKA08L3ZsPxHY5VcWlVqS/t6tYopgdoRHoo4FtY0ClD1ESYgdeAV0tndnqF6rgk9UmSptrn0mJ1kxZz77MAZvaB4Krr5XYeo8aaXrNeZ7dLUwBHEkAdidli7qgp1P7Mln23sGCfAgD3Gi0CXg3DraSlrn8IcCAp18kCXulMp9zSmZ/gqDUYhPAafwH1XZuJ2+m56rdu0OVbN8SJ++fj9PRLVVP97dK+6wMLH1UprCNx6XqGe5z9wxdkCK6XhuPbZfqHXuY36TGMVIwXUOgAAAAASUVORK5CYII=" alt="AhaSlides QR code" style="width:260px;max-width:80%;height:auto;border-radius:12px;border:1px solid var(--border);padding:8px;background:#fff"></p>
-<p><a class="check" style="display:inline-block;text-decoration:none;font-size:18px" href="https://ahaslides.com/O241N" target="_blank">ahaslides.com/O241N</a></p>
-<p class="small">Enter 3–5 English words or phrases from today’s three listenings.</p>
+<div class="cloud-joining">
+  <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAIQAAACEAQAAAAB5P74KAAABBElEQVR42s2WMW4EQQgEC+vy5gf7/2ftD5oXtIO1AztkpNMRErSGpoCp8Dfmi//x3kxV9dA9TVX1UocoESFBSuT1C6sxGWyqt3W9ANCg9rljdQHTZzoxnqsA4q1OpUC/7IDubb+SxJFtJYm3PjdwNypE31rzgxQJI+Q1P8QKKCh22OvEjowIjrPXUTDBgL2fi5pxCxBC+7mwejITyPSaQ0ISK7ZiH/hjS1GioL0/L4Tpu55pv/Z1yRHkIdInHOLw8MOBP3KQQgDlgMMkJMSKOOCwqsNkoMf7fagE0Ai855kI6WfMDvx5MnbPINNn9+Jqo4bx2T01T/NP9g8Pg4QTnuvD/i3fTq7IlzwIiQ0AAAAASUVORK5CYII=" alt="Scan to join the AhaSlides Word Cloud">
+  <div>
+    <strong>Students: join the Word Cloud on your phone.</strong>
+    <p>Scan the code or open <a href="https://ahaslides.com/O241N" target="_blank" rel="noopener">ahaslides.com/O241N</a></p>
+    <p class="small">Enter 3–5 English words or phrases from Unit 3.2, Unit 3.3 or Bluey – Sticky Gecko.</p>
+  </div>
 </div>
 </section>
 
@@ -478,21 +507,45 @@ function checkTable(id,fb){
 }
 
 
+function showLiveCloud(){
+  const input=document.getElementById('cloudPresenterLink');
+  const out=document.getElementById('cloudError');
+  const frame=document.getElementById('cloudPresenterFrame');
+  const setup=document.getElementById('cloudSetup');
+  const raw=input.value.trim();
+  let url;
+  try {
+    const parsed=new URL(raw);
+    const h=parsed.hostname.toLowerCase();
+    if(parsed.protocol!=='https:' || !(h==='ahaslides.com'||h.endsWith('.ahaslides.com')||h.endsWith('.ahaslides.io')))
+      throw new Error('Please paste the AhaSlides presenter embed link.');
+    if(parsed.pathname==='/'||raw==='https://ahaslides.com/O241N')
+      throw new Error('The student participation link cannot show the presenter results. Use Share → Embed → Present from another app.');
+    url=parsed.toString();
+  } catch(e) {
+    out.textContent=e.message || 'Invalid AhaSlides link.';
+    return;
+  }
+  out.textContent='';
+  try{localStorage.setItem('lesson3WordCloudPresenterLink',url)}catch(e){}
+  frame.src=url;
+  frame.classList.add('ready');
+  setup.style.display='none';
 }
-function startSprintTimer(){
-  if(sprintInterval)clearInterval(sprintInterval);
-  sprintLeft=300;
-  const el=document.getElementById('sprintTimer');
-  const tick=()=>{
-    const m=String(Math.floor(sprintLeft/60)).padStart(2,'0');
-    const s=String(sprintLeft%60).padStart(2,'0');
-    el.textContent=m+':'+s;
-    if(sprintLeft<=0){clearInterval(sprintInterval);sprintInterval=null;el.textContent='TIME!';return}
-    sprintLeft--;
-  };
-  tick();sprintInterval=setInterval(tick,1000);
+function showCloudSettings(){
+  document.getElementById('cloudSetup').style.display='block';
+  const frame=document.getElementById('cloudPresenterFrame');
+  frame.classList.remove('ready');frame.removeAttribute('src');
 }
-paintSprint();
+try{
+  const saved=localStorage.getItem('lesson3WordCloudPresenterLink');
+  if(saved && document.getElementById('cloudPresenterLink')){
+    document.getElementById('cloudPresenterLink').value=saved;
+    showLiveCloud();
+  }
+}catch(e){}
+
+
 </script>
 </body>
 </html>
