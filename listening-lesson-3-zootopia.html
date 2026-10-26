@@ -266,18 +266,26 @@ select,textarea,input{width:100%;padding:10px;border:1px solid #cfd8e5;border-ra
 </div>
 
 <div class="card">
-<h2>Before watching – Glossary</h2>
-<p class="small">These words and phrases come from the script of the selected first-day-at-work scene.</p>
+<h2>Before watching – Extended glossary</h2>
+<p class="small">All items below occur in the selected first-day-at-work scene or its immediate parking-duty sequence.</p>
 <table class="glossary">
 <tr><th>Word / phrase</th><th>IPA</th><th>Russian</th></tr>
+<tr><td>items on the docket</td><td>/ˌaɪtəmz ɒn ðə ˈdɒkɪt/</td><td>пункты повестки, вопросы на рассмотрении</td></tr>
+<tr><td>acknowledge</td><td>/əkˈnɒlɪdʒ/</td><td>признать, отметить, обратить внимание на</td></tr>
+<tr><td>new recruits</td><td>/ˌnjuː rɪˈkruːts/</td><td>новобранцы, новые сотрудники</td></tr>
+<tr><td>missing mammal cases</td><td>/ˌmɪsɪŋ ˈmæməl ˌkeɪsɪz/</td><td>дела о пропавших млекопитающих</td></tr>
+<tr><td>predators</td><td>/ˈpredətəz/</td><td>хищники</td></tr>
+<tr><td>priority number one</td><td>/praɪˌɒrəti ˌnʌmbə ˈwʌn/</td><td>задача номер один, главный приоритет</td></tr>
 <tr><td>assignments</td><td>/əˈsaɪnmənts/</td><td>задания, распределение обязанностей</td></tr>
 <tr><td>parking duty</td><td>/ˈpɑːkɪŋ ˌdjuːti/</td><td>дежурство по контролю парковки</td></tr>
+<tr><td>dismissed</td><td>/dɪsˈmɪst/</td><td>свободны; разойтись</td></tr>
 <tr><td>handle a case</td><td>/ˌhændl ə ˈkeɪs/</td><td>взяться за дело, вести дело</td></tr>
 <tr><td>top of my class</td><td>/ˌtɒp əv maɪ ˈklɑːs/</td><td>лучший / лучшая в своей группе</td></tr>
 <tr><td>academy</td><td>/əˈkædəmi/</td><td>академия</td></tr>
 <tr><td>token bunny</td><td>/ˌtəʊkən ˈbʌni/</td><td>«кролик для галочки», символический представитель</td></tr>
 <tr><td>write tickets</td><td>/ˌraɪt ˈtɪkɪts/</td><td>выписывать штрафы</td></tr>
 <tr><td>before noon</td><td>/bɪˌfɔː ˈnuːn/</td><td>до полудня</td></tr>
+<tr><td>be on a roll</td><td>/bi ɒn ə ˈrəʊl/</td><td>быть на подъёме; успешно делать одно за другим</td></tr>
 </table>
 </div>
 
@@ -375,7 +383,7 @@ select,textarea,input{width:100%;padding:10px;border:1px solid #cfd8e5;border-ra
 <div class="hero" style="background:linear-gradient(135deg,#f6c94b,#ff796a)">
   <div>5-MINUTE CHAT CHALLENGE</div>
   <h1>RUSSIAN → ENGLISH</h1>
-  <p>The same 24 words and phrases from Unit 3.2 + Unit 3.3 + Zootopia.</p>
+  <p>The same 32 words and phrases from Unit 3.2 + Unit 3.3 + Zootopia.</p>
 </div>
 
 <div class="card">
@@ -384,7 +392,7 @@ select,textarea,input{width:100%;padding:10px;border:1px solid #cfd8e5;border-ra
 
 <div class="sprintbox">
   <div class="sprinttimer" id="sprintTimer">05:00</div>
-  <div class="small" id="sprintCount">Prompt 1 of 24</div>
+  <div class="small" id="sprintCount">Prompt 1 of 32</div>
   <div class="sprintprompt" id="sprintPrompt">тропический лес</div>
   <div class="sprintanswer" id="sprintAnswer">tropical forest</div>
   <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap">
@@ -492,14 +500,22 @@ const sprintItems=[
   {ru:'утренние молитвы',en:'morning prayers'},
   {ru:'петь / произносить хором',en:'chant together'},
   {ru:'медитировать вместе',en:'meditate together'},
+  {ru:'пункты повестки / вопросы на рассмотрении',en:'items on the docket'},
+  {ru:'признать / отметить / обратить внимание на',en:'acknowledge'},
+  {ru:'новобранцы / новые сотрудники',en:'new recruits'},
+  {ru:'дела о пропавших млекопитающих',en:'missing mammal cases'},
+  {ru:'хищники',en:'predators'},
+  {ru:'главный приоритет / задача номер один',en:'priority number one'},
   {ru:'задания / распределение обязанностей',en:'assignments'},
   {ru:'дежурство по контролю парковки',en:'parking duty'},
+  {ru:'свободны / разойтись',en:'dismissed'},
   {ru:'взяться за дело / вести дело',en:'handle a case'},
   {ru:'лучший / лучшая в своей группе',en:'top of my class'},
   {ru:'академия',en:'academy'},
   {ru:'«кролик для галочки»',en:'token bunny'},
   {ru:'выписывать штрафы',en:'write tickets'},
-  {ru:'до полудня',en:'before noon'}
+  {ru:'до полудня',en:'before noon'},
+  {ru:'быть на подъёме / успешно делать одно за другим',en:'be on a roll'}
 ];
 let sprintIndex=0,sprintInterval=null,sprintLeft=300;
 function paintSprint(){
