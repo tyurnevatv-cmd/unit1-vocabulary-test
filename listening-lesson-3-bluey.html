@@ -52,7 +52,7 @@ select,textarea,input{width:100%;padding:10px;border:1px solid #cfd8e5;border-ra
 <button data-go="u32">UNIT 3.2</button>
 <button data-go="u33">UNIT 3.3</button>
 <button data-go="bluey">BLUEY</button>
-<button data-go="sprint">5-MIN SPRINT</button>
+<button data-go="wordcloud">WORD CLOUD</button>
 <button data-go="finish">FINISH</button>
 </nav>
 
@@ -370,28 +370,29 @@ select,textarea,input{width:100%;padding:10px;border:1px solid #cfd8e5;border-ra
 </div>
 </section>
 
-<section id="sprint">
+<section id="wordcloud">
 <div class="hero" style="background:linear-gradient(135deg,#f6c94b,#ff796a)">
-  <div>5-MINUTE CHAT CHALLENGE</div>
-  <h1>RUSSIAN → ENGLISH</h1>
-  <p>The same 36 words and phrases from Unit 3.2 + Unit 3.3 + Bluey.</p>
+  <div>FINAL VOCABULARY ACTIVITY</div>
+  <h1>WORD CLOUD</h1>
+  <p>Vocabulary from Unit 3.2 + Unit 3.3 + Bluey</p>
 </div>
 
 <div class="card">
-<p><strong>Rules:</strong> about 8 seconds per prompt. Spelling counts. First correct answer in the chat gets 1 point.</p>
+<h2>What do you remember?</h2>
+<p><strong>Type 3–5 English words or phrases</strong> from today’s three listenings.</p>
+<p>Try to include vocabulary from:</p>
+<div class="grid three">
+  <div class="card"><strong>Unit 3.2</strong><br>Jane Goodall</div>
+  <div class="card"><strong>Unit 3.3</strong><br>Spiritual retreat</div>
+  <div class="card"><strong>Bluey</strong><br>Sticky Gecko</div>
+</div>
+<p class="small">One word or phrase per response. English only. Repeated answers will appear larger in the cloud.</p>
 </div>
 
-<div class="sprintbox">
-  <div class="sprinttimer" id="sprintTimer">05:00</div>
-  <div class="small" id="sprintCount">Prompt 1 of 36</div>
-  <div class="sprintprompt" id="sprintPrompt">обычный, типичный день</div>
-  <div class="sprintanswer" id="sprintAnswer">typical day</div>
-  <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap">
-    <button class="check" onclick="startSprintTimer()">START 5 MIN</button>
-    <button class="check" style="background:#876fe0" onclick="revealSprint()">SHOW ANSWER</button>
-    <button class="check" style="background:#37b9ad" onclick="nextSprint()">NEXT</button>
-    <button class="check secondary" onclick="resetSprint()">RESET</button>
-  </div>
+<div class="card">
+<h2>Open AhaSlides</h2>
+<p>Teacher opens the presentation, then students join using the QR code or join code shown on AhaSlides.</p>
+<p><a class="check" style="display:inline-block;text-decoration:none" href="https://presenter.ahaslides.com/presentation/10465305" target="_blank">OPEN AHASLIDES WORD CLOUD</a></p>
 </div>
 </section>
 
@@ -474,59 +475,7 @@ function checkTable(id,fb){
   if(n===sels.length)add(2);
 }
 
-const sprintItems=[
-  {ru:'обычный, типичный день',en:'typical day'},
-  {ru:'вставать',en:'get up'},
-  {ru:'следовать за шимпанзе / наблюдать за ними',en:'follow the chimps'},
-  {ru:'пробираться ползком через джунгли',en:'crawl through the jungle'},
-  {ru:'в итоге оказаться где-либо',en:'end up'},
-  {ru:'усталость',en:'tiredness'},
-  {ru:'на открытом огне / на костре',en:'over an open fire'},
-  {ru:'отвечать на письма',en:'reply to letters'},
-  {ru:'пропустить завтрак',en:'miss breakfast'},
-  {ru:'Не хотите присоединиться к нам?',en:'Do you fancy joining us?'},
-  {ru:'Вы, должно быть, шутите!',en:'You must be kidding!'},
-  {ru:'очень холодный / ледяной',en:'freezing'},
-  {ru:'освежить душу / восстановиться духовно',en:'refresh your soul'},
-  {ru:'утренние молитвы',en:'morning prayers'},
-  {ru:'петь / произносить хором',en:'chant together'},
-  {ru:'медитировать вместе',en:'meditate together'},
-  {ru:'живее / быстрее',en:'quick sticks'},
-  {ru:'поторопиться / пошевеливаться',en:'get a move on'},
-  {ru:'опоздать / быть поздно',en:'be late'},
-  {ru:'пока ещё / прямо сейчас',en:'just yet'},
-  {ru:'чистить зубы',en:'clean your teeth'},
-  {ru:'я засеку тебе время',en:"I’ll time you"},
-  {ru:'на старт, внимание, марш',en:'ready, set, go'},
-  {ru:'продолжай засекать время',en:'keep timing'},
-  {ru:'поторопись, а потом жди',en:'hurry up and wait'},
-  {ru:'прибрать это',en:'tidy this up'},
-  {ru:'за дверь / из дома',en:'out the door'},
-  {ru:'отправляться / начинать двигаться',en:'get going'},
-  {ru:'надеть роликовые коньки',en:'put on my rollerskates'},
-  {ru:'помочь ему',en:'give him a hand'},
-  {ru:'когда тебя торопят',en:'be rushed'},
-  {ru:'заставлять людей ждать',en:'keep people waiting'},
-  {ru:'быть / приходить вовремя',en:'be on time'},
-  {ru:'занимать целую вечность',en:'take ages'},
-  {ru:'встреча детей, чтобы поиграть вместе',en:'play date'},
-  {ru:'опаздывать / задерживаться',en:'running late'},
-  {ru:'не спешить / делать в своём темпе',en:'take your time'}
-];
-let sprintIndex=0,sprintInterval=null,sprintLeft=300;
-function paintSprint(){
-  document.getElementById('sprintPrompt').textContent=sprintItems[sprintIndex].ru;
-  document.getElementById('sprintAnswer').textContent=sprintItems[sprintIndex].en;
-  document.getElementById('sprintAnswer').classList.remove('show');
-  document.getElementById('sprintCount').textContent='Prompt '+(sprintIndex+1)+' of '+sprintItems.length;
-}
-function revealSprint(){document.getElementById('sprintAnswer').classList.add('show')}
-function nextSprint(){sprintIndex=(sprintIndex+1)%sprintItems.length;paintSprint()}
-function resetSprint(){
-  sprintIndex=0;sprintLeft=300;
-  if(sprintInterval)clearInterval(sprintInterval);sprintInterval=null;
-  document.getElementById('sprintTimer').textContent='05:00';
-  paintSprint();
+
 }
 function startSprintTimer(){
   if(sprintInterval)clearInterval(sprintInterval);
