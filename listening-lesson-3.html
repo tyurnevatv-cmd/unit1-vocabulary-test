@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Listening Lesson 3 – Daily Activities</title>
+<style>
+:root{
+  --bg:#f6f8fc;--card:#fff;--ink:#263348;--muted:#6d7890;
+  --blue:#4f8fff;--teal:#37b9ad;--purple:#876fe0;--coral:#ff796a;
+  --yellow:#f6c94b;--green:#51b568;--red:#d94b4b;--border:#dfe5ee
+}
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial,sans-serif;background:linear-gradient(#f8fbff,#eef4fb);color:var(--ink)}
+nav{position:sticky;top:0;z-index:10;display:flex;gap:8px;overflow:auto;padding:10px;background:#fff;border-bottom:1px solid var(--border)}
+nav button{border:0;border-radius:999px;padding:9px 14px;font-weight:700;white-space:nowrap;cursor:pointer;background:#edf2f8;color:var(--ink)}
+nav button.active{background:var(--blue);color:#fff}
+main{max-width:1050px;margin:auto;padding:18px 14px 70px}
+section{display:none}section.active{display:block}
+.hero{padding:28px;border-radius:22px;color:#fff;background:linear-gradient(135deg,var(--blue),var(--purple));margin-bottom:18px;box-shadow:0 10px 28px rgba(35,55,85,.10)}
+.hero h1{margin:4px 0 8px;font-size:clamp(30px,6vw,50px)}.hero p{margin:0;font-size:18px}
+.card{background:var(--card);border:1px solid var(--border);border-radius:18px;padding:20px;margin:14px 0;box-shadow:0 10px 28px rgba(35,55,85,.08)}
+.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}.three{grid-template-columns:repeat(3,1fr)}
+.tag{display:inline-block;padding:6px 10px;border-radius:999px;font-size:12px;font-weight:800;background:#eaf2ff;color:#275da9;margin:0 5px 5px 0}
+.choice{display:block;width:100%;text-align:left;margin:8px 0;padding:12px;border:1px solid var(--border);border-radius:12px;background:#fff;cursor:pointer}
+.choice.selected{border-color:var(--blue);background:#eaf2ff}.choice.correct{border-color:var(--green);background:#edf9f0}.choice.wrong{border-color:var(--red);background:#fff0f0}
+button.check{border:0;border-radius:12px;padding:10px 14px;background:var(--blue);color:#fff;font-weight:800;cursor:pointer;margin-top:8px}
+button.secondary{background:#6d7890}
+.feedback{font-weight:800;margin-top:10px;min-height:22px}.good{color:var(--green)}.bad{color:var(--red)}
+table{width:100%;border-collapse:collapse}th,td{border:1px solid var(--border);padding:9px;vertical-align:top}th{background:#f3f6fa;text-align:left}
+select,textarea,input{width:100%;padding:10px;border:1px solid #cfd8e5;border-radius:10px;font:inherit}textarea{min-height:78px}
+.glossary td:first-child{font-weight:800}
+.note{padding:14px;border-radius:14px;background:#f7f2ff;border-left:5px solid var(--purple);margin:12px 0}
+.small{color:var(--muted);font-size:13px}
+.score{position:fixed;right:14px;bottom:14px;background:#1f2b3d;color:#fff;padding:10px 14px;border-radius:14px;font-weight:800}
+.sprintbox{background:linear-gradient(135deg,#fff8dc,#fff);border:2px solid var(--yellow);border-radius:20px;padding:24px;text-align:center}
+.sprintprompt{font-size:clamp(28px,5vw,46px);font-weight:900;margin:18px 0}
+.sprintanswer{display:none;font-size:clamp(22px,4vw,34px);font-weight:900;color:var(--green);margin:14px 0}
+.sprintanswer.show{display:block}.sprinttimer{font-size:46px;font-weight:900;color:var(--purple);font-variant-numeric:tabular-nums}
+@media(max-width:760px){.grid,.three{grid-template-columns:1fr}.hero{padding:22px}}
+</style>
+</head>
+<body>
+<nav>
+<button class="active" data-go="start">START</button>
+<button data-go="u32">UNIT 3.2</button>
+<button data-go="u33">UNIT 3.3</button>
+<button data-go="sprint">5-MIN SPRINT</button>
+<button data-go="finish">FINISH</button>
+</nav>
+
+<main>
+<section id="start" class="active">
+<div class="hero">
+  <div>LISTENING LESSON 3</div>
+  <h1>DAILY ACTIVITIES</h1>
+  <p>Listening Extra • Unit 3.2 + Unit 3.3 • no elementary level</p>
+</div>
+
+<div class="grid three">
+  <div class="card"><h3>1. Daily routine</h3><p>Jane Goodall: a typical day in Africa and in the UK.</p><span class="tag">3.2</span><span class="tag">Track 12</span><span class="tag">Intermediate</span></div>
+  <div class="card"><h3>2. Retreat timetable</h3><p>A spiritual retreat: activities, times and reactions.</p><span class="tag">3.3</span><span class="tag">Track 13</span><span class="tag">Upper-intermediate</span></div>
+  <div class="card"><h3>3. Chat sprint</h3><p>Russian → English vocabulary from both recordings.</p><span class="tag">5 min</span></div>
+</div>
+
+<div class="card">
+  <h2>Warm-up – Which day sounds harder?</h2>
+  <p>Choose one and explain in the class chat:</p>
+  <button class="choice vote">A day following chimpanzees in a tropical forest</button>
+  <button class="choice vote">A day at a spiritual retreat with yoga and meditation</button>
+  <p class="small">There is no correct answer. Give one reason.</p>
+</div>
+</section>
+
+<section id="u32">
+<div class="hero" style="background:linear-gradient(135deg,#4f8fff,#37b9ad)">
+  <div>UNIT 3.2 • INTERMEDIATE</div>
+  <h1>A day in the life of…</h1>
+  <p>Jane Goodall • completing notes • listening for specific information • Track 12</p>
+</div>
+
+<div class="card">
+<h2>Before listening – Glossary</h2>
+<table class="glossary">
+<tr><th>Word / phrase</th><th>Russian</th></tr>
+<tr><td>chimpanzee</td><td>шимпанзе</td></tr>
+<tr><td>researcher</td><td>исследователь</td></tr>
+<tr><td>branch</td><td>ветка</td></tr>
+<tr><td>tropical forest</td><td>тропический лес</td></tr>
+<tr><td>follow the chimps</td><td>следовать за шимпанзе, наблюдать за ними</td></tr>
+<tr><td>settle down for the night</td><td>устроиться на ночь</td></tr>
+<tr><td>open fire</td><td>открытый огонь, костёр</td></tr>
+<tr><td>tiring</td><td>утомительный</td></tr>
+<tr><td>typical</td><td>типичный, обычный</td></tr>
+<tr><td>reply to letters</td><td>отвечать на письма</td></tr>
+</table>
+</div>
+
+<div class="card">
+<h2>Task 1 – First listening: the big picture</h2>
+<p>What is the interview mainly about?</p>
+<button class="choice single" data-group="u32gist" data-ok="1">Jane Goodall describes a typical working day and compares life in Africa with life in the UK.</button>
+<button class="choice single" data-group="u32gist">Jane Goodall explains how to become a university professor.</button>
+<button class="choice single" data-group="u32gist">Jane Goodall talks only about what chimpanzees eat.</button>
+<button class="check" onclick="checkSingle('u32gist','fb32gist')">CHECK</button>
+<div id="fb32gist" class="feedback"></div>
+</div>
+
+<div class="card">
+<h2>Task 2 – Listen again: Africa or UK?</h2>
+<p>Choose where each activity belongs.</p>
+<table id="africaUk">
+<tr><th>Activity</th><th>Place</th></tr>
+<tr><td>follows chimpanzees in the forest</td><td><select data-key="africa"><option value="">Choose…</option><option value="africa">Africa</option><option value="uk">UK</option></select></td></tr>
+<tr><td>swims in Lake Tanganyika</td><td><select data-key="africa"><option value="">Choose…</option><option value="africa">Africa</option><option value="uk">UK</option></select></td></tr>
+<tr><td>cooks dinner over an open fire</td><td><select data-key="africa"><option value="">Choose…</option><option value="africa">Africa</option><option value="uk">UK</option></select></td></tr>
+<tr><td>replies to many letters</td><td><select data-key="uk"><option value="">Choose…</option><option value="africa">Africa</option><option value="uk">UK</option></select></td></tr>
+<tr><td>has tea with her family</td><td><select data-key="uk"><option value="">Choose…</option><option value="africa">Africa</option><option value="uk">UK</option></select></td></tr>
+<tr><td>goes for a walk with her dog</td><td><select data-key="uk"><option value="">Choose…</option><option value="africa">Africa</option><option value="uk">UK</option></select></td></tr>
+</table>
+<button class="check" onclick="checkTable('africaUk','fbAfricaUk')">CHECK</button>
+<div id="fbAfricaUk" class="feedback"></div>
+</div>
+
+<div class="card">
+<h2>Task 3 – Listen for details</h2>
+<p>Choose the detail you hear.</p>
+
+<p><strong>1. What does she have with breakfast in Africa?</strong></p>
+<button class="choice single" data-group="u32d1" data-ok="1">bread and coffee</button>
+<button class="choice single" data-group="u32d1">eggs and tea</button>
+<button class="choice single" data-group="u32d1">fruit and milk</button>
+<button class="check" onclick="checkSingle('u32d1','fb32d1')">CHECK</button><div id="fb32d1" class="feedback"></div>
+
+<p><strong>2. What does she usually have for lunch while following the chimps?</strong></p>
+<button class="choice single" data-group="u32d2" data-ok="1">nothing</button>
+<button class="choice single" data-group="u32d2">sandwiches</button>
+<button class="choice single" data-group="u32d2">rice and vegetables</button>
+<button class="check" onclick="checkSingle('u32d2','fb32d2')">CHECK</button><div id="fb32d2" class="feedback"></div>
+
+<p><strong>3. In the UK, whose letters does she especially reply to?</strong></p>
+<button class="choice single" data-group="u32d3">journalists</button>
+<button class="choice single" data-group="u32d3" data-ok="1">children</button>
+<button class="choice single" data-group="u32d3">scientists only</button>
+<button class="check" onclick="checkSingle('u32d3','fb32d3')">CHECK</button><div id="fb32d3" class="feedback"></div>
+</div>
+
+<div class="card">
+<h2>Task 4 – Put the UK routine in order</h2>
+<p>Number the events from 1 to 4.</p>
+<table id="routineOrder">
+<tr><th>Event</th><th>Order</th></tr>
+<tr><td>She has tea with her family.</td><td><select data-key="2"><option value="">—</option><option>1</option><option>2</option><option>3</option><option>4</option></select></td></tr>
+<tr><td>She replies to letters.</td><td><select data-key="1"><option value="">—</option><option>1</option><option>2</option><option>3</option><option>4</option></select></td></tr>
+<tr><td>She goes for a walk with her dog.</td><td><select data-key="3"><option value="">—</option><option>1</option><option>2</option><option>3</option><option>4</option></select></td></tr>
+<tr><td>After supper, she goes back to work.</td><td><select data-key="4"><option value="">—</option><option>1</option><option>2</option><option>3</option><option>4</option></select></td></tr>
+</table>
+<button class="check" onclick="checkTable('routineOrder','fbRoutine')">CHECK</button>
+<div id="fbRoutine" class="feedback"></div>
+</div>
+
+<div class="card">
+<h2>Quick chat</h2>
+<p>Which of Jane Goodall’s two routines would you prefer: Africa or the UK? Give one reason.</p>
+<textarea placeholder="I would prefer ... because ..."></textarea>
+</div>
+</section>
+
+<section id="u33">
+<div class="hero" style="background:linear-gradient(135deg,#876fe0,#ff796a)">
+  <div>UNIT 3.3 • UPPER-INTERMEDIATE</div>
+  <h1>Time to refresh your soul</h1>
+  <p>Spiritual retreat • ordering pictures • timetable • attitudes • Track 13</p>
+</div>
+
+<div class="card">
+<h2>Before listening – Glossary</h2>
+<table class="glossary">
+<tr><th>Word / phrase</th><th>Russian</th></tr>
+<tr><td>spiritual retreat</td><td>духовный ретрит, уединённый отдых</td></tr>
+<tr><td>chant</td><td>петь / произносить ритмично, хором</td></tr>
+<tr><td>meditation</td><td>медитация</td></tr>
+<tr><td>prayer</td><td>молитва</td></tr>
+<tr><td>unwind</td><td>расслабиться, снять напряжение</td></tr>
+<tr><td>refresh your soul</td><td>освежить душу, восстановиться духовно</td></tr>
+<tr><td>freezing</td><td>очень холодный; ледяной</td></tr>
+<tr><td>creative</td><td>творческий</td></tr>
+<tr><td>express yourself</td><td>выразить себя</td></tr>
+<tr><td>take to something</td><td>быстро полюбить / освоить что-либо</td></tr>
+</table>
+</div>
+
+<div class="card">
+<h2>Task 1 – First listening: Where are they?</h2>
+<p>What is the woman doing?</p>
+<button class="choice single" data-group="u33gist" data-ok="1">She is staying at a spiritual retreat and checking the day’s programme.</button>
+<button class="choice single" data-group="u33gist">She is booking a beach holiday at a travel agency.</button>
+<button class="choice single" data-group="u33gist">She is interviewing for a new job.</button>
+<button class="check" onclick="checkSingle('u33gist','fb33gist')">CHECK</button>
+<div id="fb33gist" class="feedback"></div>
+</div>
+
+<div class="card">
+<h2>Task 2 – Build the timetable</h2>
+<p>Listen again and match the activity to the time.</p>
+<table id="retreatTimes">
+<tr><th>Activity</th><th>Time</th></tr>
+<tr><td>morning prayers / chanting</td><td><select data-key="630"><option value="">Choose…</option><option value="630">6:30–7:00</option><option value="700">7:00–8:00</option><option value="1000">10:00–12:00</option><option value="100">1:00–2:00</option></select></td></tr>
+<tr><td>yoga</td><td><select data-key="700"><option value="">Choose…</option><option value="630">6:30–7:00</option><option value="700">7:00–8:00</option><option value="1000">10:00–12:00</option><option value="100">1:00–2:00</option></select></td></tr>
+<tr><td>meditation</td><td><select data-key="1000"><option value="">Choose…</option><option value="630">6:30–7:00</option><option value="700">7:00–8:00</option><option value="1000">10:00–12:00</option><option value="100">1:00–2:00</option></select></td></tr>
+<tr><td>special dance among the trees</td><td><select data-key="100"><option value="">Choose…</option><option value="630">6:30–7:00</option><option value="700">7:00–8:00</option><option value="1000">10:00–12:00</option><option value="100">1:00–2:00</option></select></td></tr>
+</table>
+<button class="check" onclick="checkTable('retreatTimes','fbRetreatTimes')">CHECK</button>
+<div id="fbRetreatTimes" class="feedback"></div>
+</div>
+
+<div class="card">
+<h2>Task 3 – What does the woman think?</h2>
+<p>Choose the best answer.</p>
+
+<p><strong>1. Swimming in the lake in December:</strong></p>
+<button class="choice single" data-group="u33a1">She is excited about it.</button>
+<button class="choice single" data-group="u33a1" data-ok="1">She refuses because she thinks it is too cold.</button>
+<button class="choice single" data-group="u33a1">She has already done it twice.</button>
+<button class="check" onclick="checkSingle('u33a1','fb33a1')">CHECK</button><div id="fb33a1" class="feedback"></div>
+
+<p><strong>2. Why did she come to the retreat?</strong></p>
+<button class="choice single" data-group="u33a2" data-ok="1">To escape her problems for a week and relax.</button>
+<button class="choice single" data-group="u33a2">To train for a sports competition.</button>
+<button class="choice single" data-group="u33a2">To learn how to cook.</button>
+<button class="check" onclick="checkSingle('u33a2','fb33a2')">CHECK</button><div id="fb33a2" class="feedback"></div>
+
+<p><strong>3. How does she react to the special dance?</strong></p>
+<button class="choice single" data-group="u33a3">She says it is exactly what she wanted.</button>
+<button class="choice single" data-group="u33a3" data-ok="1">She is doubtful and says it does not really sound like her kind of activity.</button>
+<button class="choice single" data-group="u33a3">She refuses to listen to the explanation.</button>
+<button class="check" onclick="checkSingle('u33a3','fb33a3')">CHECK</button><div id="fb33a3" class="feedback"></div>
+</div>
+
+<div class="card">
+<h2>Task 4 – Which activities would YOU do?</h2>
+<p>Choose two and explain in the class chat.</p>
+<div class="grid">
+  <button class="choice personal">morning chanting</button>
+  <button class="choice personal">yoga</button>
+  <button class="choice personal">meditation</button>
+  <button class="choice personal">swimming in a cold lake</button>
+  <button class="choice personal">creative painting</button>
+  <button class="choice personal">dance among the trees</button>
+</div>
+<p class="small">Sentence starter: “I would choose … because …”</p>
+</div>
+</section>
+
+<section id="sprint">
+<div class="hero" style="background:linear-gradient(135deg,#f6c94b,#ff796a)">
+  <div>5-MINUTE CHAT CHALLENGE</div>
+  <h1>RUSSIAN → ENGLISH</h1>
+  <p>Type the English translation in the class chat.</p>
+</div>
+
+<div class="card">
+<p><strong>Rules:</strong> 15–20 seconds per prompt. Spelling counts. First correct answer gets 1 point.</p>
+</div>
+
+<div class="sprintbox">
+  <div class="sprinttimer" id="sprintTimer">05:00</div>
+  <div class="small" id="sprintCount">Prompt 1 of 12</div>
+  <div class="sprintprompt" id="sprintPrompt">тропический лес</div>
+  <div class="sprintanswer" id="sprintAnswer">tropical forest</div>
+  <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap">
+    <button class="check" onclick="startSprintTimer()">START 5 MIN</button>
+    <button class="check" style="background:#876fe0" onclick="revealSprint()">SHOW ANSWER</button>
+    <button class="check" style="background:#37b9ad" onclick="nextSprint()">NEXT</button>
+    <button class="check secondary" onclick="resetSprint()">RESET</button>
+  </div>
+</div>
+</section>
+
+<section id="finish">
+<div class="hero" style="background:linear-gradient(135deg,#37b9ad,#4f8fff)">
+  <div>EXIT TICKET</div>
+  <h1>3 – 2 – 1</h1>
+  <p>One final message in the class chat.</p>
+</div>
+<div class="grid three">
+<div class="card"><h2>3 words</h2><textarea placeholder="Three new words..."></textarea></div>
+<div class="card"><h2>2 facts</h2><textarea placeholder="Two facts from today's recordings..."></textarea></div>
+<div class="card"><h2>1 choice</h2><textarea placeholder="Which lifestyle would you choose: Jane Goodall's field day or the retreat? Why?"></textarea></div>
+</div>
+</section>
+</main>
+
+<div class="score">⭐ <span id="score">0</span></div>
+
+<script>
+let score=0;
+function add(n){score+=n;document.getElementById('score').textContent=score}
+
+document.querySelectorAll('nav button').forEach(b=>b.onclick=()=>{
+  document.querySelectorAll('nav button').forEach(x=>x.classList.remove('active'));
+  b.classList.add('active');
+  document.querySelectorAll('section').forEach(s=>s.classList.remove('active'));
+  document.getElementById(b.dataset.go).classList.add('active');
+  scrollTo(0,0);
+});
+
+document.querySelectorAll('.vote').forEach(b=>b.onclick=()=>{
+  document.querySelectorAll('.vote').forEach(x=>x.classList.remove('selected')); b.classList.add('selected');
+});
+document.querySelectorAll('.personal').forEach(b=>b.onclick=()=>{
+  const all=[...document.querySelectorAll('.personal')];
+  if(!b.classList.contains('selected') && all.filter(x=>x.classList.contains('selected')).length>=2)return;
+  b.classList.toggle('selected');
+});
+document.querySelectorAll('.single').forEach(b=>b.onclick=()=>{
+  document.querySelectorAll('[data-group="'+b.dataset.group+'"]').forEach(x=>x.classList.remove('selected'));
+  b.classList.add('selected');
+});
+
+function checkSingle(group,fb){
+  const opts=[...document.querySelectorAll('[data-group="'+group+'"]')];
+  const sel=opts.find(x=>x.classList.contains('selected'));
+  const f=document.getElementById(fb);
+  opts.forEach(x=>x.classList.remove('correct','wrong'));
+  if(!sel){f.textContent='Choose an answer first.';f.className='feedback bad';return}
+  if(sel.dataset.ok){sel.classList.add('correct');f.textContent='Correct!';f.className='feedback good';add(1)}
+  else{sel.classList.add('wrong');f.textContent='Listen again.';f.className='feedback bad'}
+}
+
+function checkTable(id,fb){
+  const sels=[...document.querySelectorAll('#'+id+' select')];
+  let n=0;
+  sels.forEach(s=>{
+    if(s.value===s.dataset.key){n++;s.style.borderColor='var(--green)'}
+    else{s.style.borderColor='var(--red)'}
+  });
+  const f=document.getElementById(fb);
+  f.textContent=n+'/'+sels.length+' correct';
+  f.className='feedback '+(n===sels.length?'good':'bad');
+  if(n===sels.length)add(2);
+}
+
+const sprintItems=[
+  {ru:'тропический лес',en:'tropical forest'},
+  {ru:'следовать за шимпанзе',en:'follow the chimps'},
+  {ru:'устроиться на ночь',en:'settle down for the night'},
+  {ru:'готовить на открытом огне',en:'cook over an open fire'},
+  {ru:'отвечать на письма',en:'reply to letters'},
+  {ru:'утомительный',en:'tiring'},
+  {ru:'духовный ретрит',en:'spiritual retreat'},
+  {ru:'расслабиться, снять напряжение',en:'unwind'},
+  {ru:'медитация',en:'meditation'},
+  {ru:'очень холодный, ледяной',en:'freezing'},
+  {ru:'выразить себя',en:'express yourself'},
+  {ru:'освежить душу / восстановиться духовно',en:'refresh your soul'}
+];
+let sprintIndex=0,sprintInterval=null,sprintLeft=300;
+function paintSprint(){
+  document.getElementById('sprintPrompt').textContent=sprintItems[sprintIndex].ru;
+  document.getElementById('sprintAnswer').textContent=sprintItems[sprintIndex].en;
+  document.getElementById('sprintAnswer').classList.remove('show');
+  document.getElementById('sprintCount').textContent='Prompt '+(sprintIndex+1)+' of '+sprintItems.length;
+}
+function revealSprint(){document.getElementById('sprintAnswer').classList.add('show')}
+function nextSprint(){sprintIndex=(sprintIndex+1)%sprintItems.length;paintSprint()}
+function resetSprint(){
+  sprintIndex=0;sprintLeft=300;
+  if(sprintInterval)clearInterval(sprintInterval);sprintInterval=null;
+  document.getElementById('sprintTimer').textContent='05:00';
+  paintSprint();
+}
+function startSprintTimer(){
+  if(sprintInterval)clearInterval(sprintInterval);
+  sprintLeft=300;
+  const el=document.getElementById('sprintTimer');
+  const tick=()=>{
+    const m=String(Math.floor(sprintLeft/60)).padStart(2,'0');
+    const s=String(sprintLeft%60).padStart(2,'0');
+    el.textContent=m+':'+s;
+    if(sprintLeft<=0){clearInterval(sprintInterval);sprintInterval=null;el.textContent='TIME!';return}
+    sprintLeft--;
+  };
+  tick();sprintInterval=setInterval(tick,1000);
+}
+paintSprint();
+</script>
+</body>
+</html>
