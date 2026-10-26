@@ -32,6 +32,12 @@ select,textarea,input{width:100%;padding:10px;border:1px solid #cfd8e5;border-ra
 .glossary td:first-child{font-weight:800}
 .note{padding:14px;border-radius:14px;background:#f7f2ff;border-left:5px solid var(--purple);margin:12px 0}
 .small{color:var(--muted);font-size:13px}
+.video{position:relative;padding-bottom:56.25%;height:0;overflow:hidden;border-radius:16px;background:#111;margin:12px 0 14px}
+.video iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.sequence-grid{display:grid;grid-template-columns:1.4fr .6fr;gap:10px;align-items:center}
+.compare-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.compare-card{padding:14px;border-radius:14px;background:#f8fbff;border:1px solid var(--border)}
+@media(max-width:760px){.compare-grid,.sequence-grid{grid-template-columns:1fr}}
 .score{position:fixed;right:14px;bottom:14px;background:#1f2b3d;color:#fff;padding:10px 14px;border-radius:14px;font-weight:800}
 .sprintbox{background:linear-gradient(135deg,#fff8dc,#fff);border:2px solid var(--yellow);border-radius:20px;padding:24px;text-align:center}
 .sprintprompt{font-size:clamp(28px,5vw,46px);font-weight:900;margin:18px 0}
@@ -45,6 +51,7 @@ select,textarea,input{width:100%;padding:10px;border:1px solid #cfd8e5;border-ra
 <button class="active" data-go="start">START</button>
 <button data-go="u32">UNIT 3.2</button>
 <button data-go="u33">UNIT 3.3</button>
+<button data-go="turningred">TURNING RED</button>
 <button data-go="sprint">5-MIN SPRINT</button>
 <button data-go="finish">FINISH</button>
 </nav>
@@ -60,7 +67,7 @@ select,textarea,input{width:100%;padding:10px;border:1px solid #cfd8e5;border-ra
 <div class="grid three">
   <div class="card"><h3>1. Daily routine</h3><p>Jane Goodall: a typical day in Africa and in the UK.</p><span class="tag">3.2</span><span class="tag">Track 12</span><span class="tag">Intermediate</span></div>
   <div class="card"><h3>2. Retreat timetable</h3><p>A spiritual retreat: activities, times and reactions.</p><span class="tag">3.3</span><span class="tag">Track 13</span><span class="tag">Upper-intermediate</span></div>
-  <div class="card"><h3>3. Chat sprint</h3><p>Russian → English vocabulary from both recordings.</p><span class="tag">5 min</span></div>
+  <div class="card"><h3>3. Animated listening</h3><p>Turning Red: follow instructions and reconstruct a ritual.</p><span class="tag">Pixar</span><span class="tag">video</span></div>
 </div>
 
 <div class="card">
@@ -252,11 +259,105 @@ select,textarea,input{width:100%;padding:10px;border:1px solid #cfd8e5;border-ra
 </div>
 </section>
 
+
+<section id="turningred">
+<div class="hero" style="background:linear-gradient(135deg,#e95b62,#876fe0)">
+  <div>ANIMATED LISTENING • PIXAR</div>
+  <h1>Turning Red – Mei's Ritual</h1>
+  <p>Sequence • instructions • key phrases • comparison with Unit 3.3</p>
+</div>
+
+<div class="card">
+<h2>Before watching – Mini glossary</h2>
+<table class="glossary">
+<tr><th>Word / phrase</th><th>Russian</th></tr>
+<tr><td>ritual</td><td>ритуал, обряд</td></tr>
+<tr><td>undergo a ritual</td><td>пройти обряд / ритуал</td></tr>
+<tr><td>seal something away</td><td>запечатать, заключить что-либо</td></tr>
+<tr><td>strong emotion</td><td>сильная эмоция</td></tr>
+<tr><td>breathe</td><td>дышать</td></tr>
+<tr><td>focus on</td><td>сосредоточиться на</td></tr>
+<tr><td>guide someone</td><td>направлять, вести кого-либо</td></tr>
+<tr><td>ancestor</td><td>предок</td></tr>
+<tr><td>inner storm</td><td>внутренняя буря; сильное внутреннее переживание</td></tr>
+<tr><td>banish</td><td>изгнать, прогнать</td></tr>
+</table>
+</div>
+
+<div class="card">
+<h2>Watch the official Pixar clip</h2>
+<p><strong>Turning Red – “Mei’s Ritual”</strong></p>
+<div class="video">
+  <iframe src="https://www.youtube.com/embed/pEzgdp-R8Zc" title="Turning Red - Mei's Ritual official Pixar clip" allowfullscreen></iframe>
+</div>
+<p class="small">If YouTube does not open, use the same clip after downloading it locally; the tasks below do not depend on subtitles.</p>
+</div>
+
+<div class="card">
+<h2>Task 1 – First watch: What kind of scene is it?</h2>
+<p>Choose the best description.</p>
+<button class="choice single" data-group="trgist">A normal school morning routine</button>
+<button class="choice single" data-group="trgist" data-ok="1">A family ritual with rules, instructions and a fixed sequence</button>
+<button class="choice single" data-group="trgist">A sports training session</button>
+<button class="check" onclick="checkSingle('trgist','fbTrGist')">CHECK</button>
+<div id="fbTrGist" class="feedback"></div>
+</div>
+
+<div class="card">
+<h2>Task 2 – Sequence challenge</h2>
+<p>Watch again. Put the actions in the order they happen.</p>
+<table id="trSequence">
+<tr><th>Action</th><th>Order</th></tr>
+<tr><td>Mei stays inside the circle.</td><td><select data-key="2"><option value="">—</option><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option></select></td></tr>
+<tr><td>The family begins chanting / singing.</td><td><select data-key="3"><option value="">—</option><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option></select></td></tr>
+<tr><td>Mei gets ready for the ritual.</td><td><select data-key="1"><option value="">—</option><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option></select></td></tr>
+<tr><td>Mei focuses on the voices around her.</td><td><select data-key="4"><option value="">—</option><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option></select></td></tr>
+<tr><td>The ritual reaches its magical turning point.</td><td><select data-key="5"><option value="">—</option><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option></select></td></tr>
+</table>
+<button class="check" onclick="checkTable('trSequence','fbTrSequence')">CHECK</button>
+<div id="fbTrSequence" class="feedback"></div>
+</div>
+
+<div class="card">
+<h2>Task 3 – Catch the instructions</h2>
+<p>Which ideas are part of the instructions Mei receives? Tick all correct answers.</p>
+<button class="choice trmulti" data-ok="1">Stay in the circle.</button>
+<button class="choice trmulti" data-ok="1">Breathe and stay calm.</button>
+<button class="choice trmulti" data-ok="1">Focus on the voices.</button>
+<button class="choice trmulti">Run outside when the chanting starts.</button>
+<button class="choice trmulti" data-ok="1">Let the voices guide you.</button>
+<button class="choice trmulti">Ignore everyone and make your own plan.</button>
+<button class="check" onclick="checkTRMulti()">CHECK</button>
+<div id="fbTRMulti" class="feedback"></div>
+</div>
+
+<div class="card">
+<h2>Task 4 – Retreat or ritual?</h2>
+<p>Compare the Pixar scene with Unit 3.3. Choose the best category for each idea.</p>
+<table id="trCompare">
+<tr><th>Idea</th><th>Where?</th></tr>
+<tr><td>breathing / concentration</td><td><select data-key="both"><option value="">Choose…</option><option value="retreat">Retreat only</option><option value="ritual">Ritual only</option><option value="both">Both</option></select></td></tr>
+<tr><td>a fixed sequence of activities</td><td><select data-key="both"><option value="">Choose…</option><option value="retreat">Retreat only</option><option value="ritual">Ritual only</option><option value="both">Both</option></select></td></tr>
+<tr><td>chanting</td><td><select data-key="both"><option value="">Choose…</option><option value="retreat">Retreat only</option><option value="ritual">Ritual only</option><option value="both">Both</option></select></td></tr>
+<tr><td>swimming in a cold lake</td><td><select data-key="retreat"><option value="">Choose…</option><option value="retreat">Retreat only</option><option value="ritual">Ritual only</option><option value="both">Both</option></select></td></tr>
+<tr><td>a magical family tradition</td><td><select data-key="ritual"><option value="">Choose…</option><option value="retreat">Retreat only</option><option value="ritual">Ritual only</option><option value="both">Both</option></select></td></tr>
+</table>
+<button class="check" onclick="checkTable('trCompare','fbTrCompare')">CHECK</button>
+<div id="fbTrCompare" class="feedback"></div>
+</div>
+
+<div class="card">
+<h2>Fast chat – 30 seconds</h2>
+<p>Which would be harder for you: <strong>Jane Goodall’s field routine</strong>, <strong>the spiritual retreat</strong>, or <strong>Mei’s ritual</strong>? Why?</p>
+<textarea placeholder="For me, ... would be the hardest because ..."></textarea>
+</div>
+</section>
+
 <section id="sprint">
 <div class="hero" style="background:linear-gradient(135deg,#f6c94b,#ff796a)">
   <div>5-MINUTE CHAT CHALLENGE</div>
   <h1>RUSSIAN → ENGLISH</h1>
-  <p>Type the English translation in the class chat.</p>
+  <p>Words and phrases from Unit 3.2 + Unit 3.3 + Turning Red.</p>
 </div>
 
 <div class="card">
@@ -313,6 +414,7 @@ document.querySelectorAll('.personal').forEach(b=>b.onclick=()=>{
   if(!b.classList.contains('selected') && all.filter(x=>x.classList.contains('selected')).length>=2)return;
   b.classList.toggle('selected');
 });
+document.querySelectorAll('.trmulti').forEach(b=>b.onclick=()=>b.classList.toggle('selected'));
 document.querySelectorAll('.single').forEach(b=>b.onclick=()=>{
   document.querySelectorAll('[data-group="'+b.dataset.group+'"]').forEach(x=>x.classList.remove('selected'));
   b.classList.add('selected');
@@ -328,6 +430,20 @@ function checkSingle(group,fb){
   else{sel.classList.add('wrong');f.textContent='Listen again.';f.className='feedback bad'}
 }
 
+function checkTRMulti(){
+  const items=[...document.querySelectorAll('.trmulti')];
+  let good=0,bad=0,total=items.filter(x=>x.dataset.ok).length;
+  items.forEach(x=>{
+    x.classList.remove('correct','wrong');
+    if(x.classList.contains('selected')){
+      if(x.dataset.ok){good++;x.classList.add('correct')}
+      else{bad++;x.classList.add('wrong')}
+    }
+  });
+  const f=document.getElementById('fbTRMulti');
+  if(good===total&&bad===0){f.textContent='Excellent!';f.className='feedback good';add(2)}
+  else{f.textContent='Watch once more: some instructions are missing or extra.';f.className='feedback bad'}
+}
 function checkTable(id,fb){
   const sels=[...document.querySelectorAll('#'+id+' select')];
   let n=0;
@@ -350,10 +466,14 @@ const sprintItems=[
   {ru:'утомительный',en:'tiring'},
   {ru:'духовный ретрит',en:'spiritual retreat'},
   {ru:'расслабиться, снять напряжение',en:'unwind'},
-  {ru:'медитация',en:'meditation'},
   {ru:'очень холодный, ледяной',en:'freezing'},
   {ru:'выразить себя',en:'express yourself'},
-  {ru:'освежить душу / восстановиться духовно',en:'refresh your soul'}
+  {ru:'пройти ритуал / обряд',en:'undergo a ritual'},
+  {ru:'сильная эмоция',en:'strong emotion'},
+  {ru:'сосредоточиться на',en:'focus on'},
+  {ru:'направлять / вести кого-либо',en:'guide someone'},
+  {ru:'внутренняя буря',en:'inner storm'},
+  {ru:'изгнать / прогнать',en:'banish'}
 ];
 let sprintIndex=0,sprintInterval=null,sprintLeft=300;
 function paintSprint(){
