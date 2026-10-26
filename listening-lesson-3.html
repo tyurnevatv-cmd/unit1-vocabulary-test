@@ -397,31 +397,23 @@ select,textarea,input{width:100%;padding:10px;border:1px solid #cfd8e5;border-ra
 
 <div class="cloud-presenter">
   <div class="cloud-header">
-    <h2>Live results from AhaSlides</h2>
-    <button class="check secondary" type="button" onclick="showCloudSettings()">SET UP / CHANGE LINK</button>
+    <h2>AhaSlides Word Cloud – Live Results</h2>
+    <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">
+      <button class="check secondary" type="button" onclick="document.getElementById('cloudPresenterFrame').src='https://presenter.ahaslides.com/share/1793004532860-1ceeetfjxw'">REFRESH RESULTS</button>
+      <a href="https://presenter.ahaslides.com/presentation/10491176?presenting=true" target="_blank" rel="noopener">PRESENTER MODE</a>
+    </div>
   </div>
   <div class="cloud-screen" id="cloudScreen">
-    <div class="cloud-setup" id="cloudSetup">
-      <h2>Show the live word cloud here</h2>
-      <p>Teacher: in AhaSlides, open presentation 10465305, then go to <strong>Share → Embed → Present from another app</strong>. Copy the presenter link and paste it here once.</p>
-      <label for="cloudPresenterLink">AhaSlides presenter embed link</label>
-      <input id="cloudPresenterLink" type="url" placeholder="https://presenter.ahaslides.com/..." autocomplete="off">
-      <div class="cloud-actions">
-        <button type="button" class="check" onclick="showLiveCloud()">SHOW LIVE RESULTS</button>
-        <a href="https://presenter.ahaslides.com/presentation/10465305" target="_blank" rel="noopener">OPEN MY AHASLIDES PRESENTATION</a>
-      </div>
-      <p id="cloudError" class="feedback bad" role="alert"></p>
-      <p class="cloud-help">The link is saved only in this browser. Click Start presenting inside the embedded AhaSlides view. Do not paste the participant link (O241N) here.</p>
-    </div>
-    <iframe id="cloudPresenterFrame" title="Live AhaSlides Word Cloud results" allow="fullscreen; autoplay; clipboard-write" allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe>
+    <iframe id="cloudPresenterFrame" class="ready" src="https://presenter.ahaslides.com/share/1793004532860-1ceeetfjxw" title="AhaSlides: What words and phrases from today's lesson do you remember?" allow="fullscreen; autoplay; clipboard-write" allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe>
   </div>
 </div>
+<p class="small">To show responses live, start presenting the AhaSlides Word Cloud from your account. If the shared view does not update, click REFRESH RESULTS or open PRESENTER MODE.</p>
 
 <div class="cloud-joining">
-  <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAIQAAACEAQAAAAB5P74KAAABBElEQVR42s2WMW4EQQgEC+vy5gf7/2ftD5oXtIO1AztkpNMRErSGpoCp8Dfmi//x3kxV9dA9TVX1UocoESFBSuT1C6sxGWyqt3W9ANCg9rljdQHTZzoxnqsA4q1OpUC/7IDubb+SxJFtJYm3PjdwNypE31rzgxQJI+Q1P8QKKCh22OvEjowIjrPXUTDBgL2fi5pxCxBC+7mwejITyPSaQ0ISK7ZiH/hjS1GioL0/L4Tpu55pv/Z1yRHkIdInHOLw8MOBP3KQQgDlgMMkJMSKOOCwqsNkoMf7fagE0Ai855kI6WfMDvx5MnbPINNn9+Jqo4bx2T01T/NP9g8Pg4QTnuvD/i3fTq7IlzwIiQ0AAAAASUVORK5CYII=" alt="Scan to join the AhaSlides Word Cloud">
+  <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAASwAAAEsAQAAAABRBrPYAAAC50lEQVR42u2a0Y0cNxBEXxv6H2XAyaRHkbEZiiMRmQkng9kISh/kngxr9iwDBs7AsT93+LEoVHdXFWniN+rxB79V//Gxh5mZ2X6ame3NDtrRAkqUgPHR+Jj/9r8+tklSJ6kDXtvh5aCYLCiBJImF282xh9kOp7nUgXa4LLIpigbjWLi9PpbU4TxwlaMpShTJ4hMD8g91bReknjqpA3gFjxxkSUKAuD4VIJLUk3qSuldXdSlyQI48B9e1iPS3+sLDANLpbW/+Zy5HoX03yCbAVgPeH9uksSlJbZ8/ekD+uSelhdsvpTd9kdRxqbokBVmKjBCrT+8E7dfH14er2X7upGIHzY4SZDNTyDBYfLvj2wVjVSZJ1VW9khVAFkPPLr79itsFW5+wdR9dKilyZAnE2qe3OoTt2jqkDkkVHzJEMeebkLRwu+Hbdk3XSRr6DSAHOSbbPhVu/NQXUk8V8OoKyAoyiDW47hsQtj71BS5VvOahMUB8Nmf0rwaXxuRKfbCt5gFbjkG3hdtt8pNO8w6pn7tXoGWzKJGjSCZYRuDu2KYz9XMAlyqAF8kUQBm+cyW0L+abZtghqeJ6rgVm8LP69N6wn2b7uXPutMNrM1NkM0kywD5Vnz4X5cgQU3VVvD4/Zg0Fsoh0N7h0cfoMX9sxAVNANpNgXS3dC9oLhg1Xx6cwCxiWUojFt1d9OpHr+GzTmfWjZQReCtqxJcdtplcYVnykjSwn/gK34QPSiGlHhFGzgqyYa2Hx7RY3XeMiM70Zz2ewPY3nmm8vcJvGc1r2igcz/WEZ9vuy5/Ob0zund6Ad/k2mKDIFhj7s+c2HLUogjaHv9Rki5hhXwItILxtwQDaTRlf1EVkHzLB/4Xa7KOfQSuPNz9sdyVPxrsTsfdyApDrervxV0LKE2Xu4SX28+JmMixnQricud/UFNsEJp7fU9lxzye27yRQC01ilC7fX+7ST+vCd8zITMiPYXnx7KczerY8RZj8AZ9V+EfZjDjsAAAAASUVORK5CYII=" alt="Scan to join the AhaSlides Word Cloud">
   <div>
     <strong>Students: join the Word Cloud on your phone.</strong>
-    <p>Scan the code or open <a href="https://ahaslides.com/O241N" target="_blank" rel="noopener">ahaslides.com/O241N</a></p>
+    <p>Scan the code or open <a href="https://audience.ahaslides.com/1ceeetfjxw" target="_blank" rel="noopener">audience.ahaslides.com/1ceeetfjxw</a></p>
     <p class="small">Enter 3–5 English words or phrases from Unit 3.2, Unit 3.3 or Bluey – Sticky Gecko.</p>
   </div>
 </div>
@@ -505,45 +497,6 @@ function checkTable(id,fb){
   f.className='feedback '+(n===sels.length?'good':'bad');
   if(n===sels.length)add(2);
 }
-
-
-function showLiveCloud(){
-  const input=document.getElementById('cloudPresenterLink');
-  const out=document.getElementById('cloudError');
-  const frame=document.getElementById('cloudPresenterFrame');
-  const setup=document.getElementById('cloudSetup');
-  const raw=input.value.trim();
-  let url;
-  try {
-    const parsed=new URL(raw);
-    const h=parsed.hostname.toLowerCase();
-    if(parsed.protocol!=='https:' || !(h==='ahaslides.com'||h.endsWith('.ahaslides.com')||h.endsWith('.ahaslides.io')))
-      throw new Error('Please paste the AhaSlides presenter embed link.');
-    if(parsed.pathname==='/'||raw==='https://ahaslides.com/O241N')
-      throw new Error('The student participation link cannot show the presenter results. Use Share → Embed → Present from another app.');
-    url=parsed.toString();
-  } catch(e) {
-    out.textContent=e.message || 'Invalid AhaSlides link.';
-    return;
-  }
-  out.textContent='';
-  try{localStorage.setItem('lesson3WordCloudPresenterLink',url)}catch(e){}
-  frame.src=url;
-  frame.classList.add('ready');
-  setup.style.display='none';
-}
-function showCloudSettings(){
-  document.getElementById('cloudSetup').style.display='block';
-  const frame=document.getElementById('cloudPresenterFrame');
-  frame.classList.remove('ready');frame.removeAttribute('src');
-}
-try{
-  const saved=localStorage.getItem('lesson3WordCloudPresenterLink');
-  if(saved && document.getElementById('cloudPresenterLink')){
-    document.getElementById('cloudPresenterLink').value=saved;
-    showLiveCloud();
-  }
-}catch(e){}
 
 
 </script>
