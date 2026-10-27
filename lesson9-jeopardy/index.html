@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lesson 9 Jeopardy</title>
+<style>
+:root {
+  --bg:#0b1f3a; --panel:#123a6d; --tile:#164d8f; --tile2:#0f3f79;
+  --gold:#ffd54a; --white:#fff; --muted:#c9d7ea; --ok:#2d7d46;
+}
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial,Helvetica,sans-serif;background:linear-gradient(180deg,#08172b,#0b1f3a);color:var(--white)}
+.wrap{max-width:1400px;margin:0 auto;padding:18px}
+h1{text-align:center;margin:2px 0 16px;font-size:clamp(26px,4vw,48px);letter-spacing:1px}
+.toolbar{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-bottom:15px}
+button{font:inherit}
+.tool{border:0;border-radius:10px;padding:10px 16px;background:#e8eef8;color:#13233b;font-weight:700;cursor:pointer}
+.board{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+.cat{background:var(--panel);border-radius:12px 12px 0 0;padding:15px 8px;text-align:center;font-weight:800;font-size:clamp(14px,2vw,22px);min-height:72px;display:flex;align-items:center;justify-content:center}
+.col{display:grid;gap:8px}
+.tile{min-height:95px;border:0;border-radius:10px;background:var(--tile);color:var(--gold);font-size:clamp(24px,4vw,44px);font-weight:900;cursor:pointer;box-shadow:inset 0 0 0 2px rgba(255,255,255,.08)}
+.tile:hover{background:var(--tile2)}
+.tile.used{opacity:.26;cursor:default;color:#8fa2ba}
+.modal{position:fixed;inset:0;background:rgba(0,0,0,.78);display:none;align-items:center;justify-content:center;padding:18px;z-index:20;overflow:auto}
+.modal.show{display:flex}
+.card{width:min(1050px,96vw);background:#f8fbff;color:#13233b;border-radius:18px;padding:28px;box-shadow:0 25px 70px rgba(0,0,0,.45);max-height:92vh;overflow:auto}
+.points{font-size:22px;font-weight:800;color:#164d8f;margin-bottom:10px}
+.question{white-space:pre-line;font-size:clamp(22px,3.5vw,40px);line-height:1.28;font-weight:750;margin:12px 0 22px}
+.answer{white-space:pre-line;display:none;margin-top:18px;padding:18px;border-radius:12px;background:#eaf4ec;border-left:6px solid var(--ok);font-size:clamp(18px,2.2vw,26px);line-height:1.4}
+.answer.show{display:block}
+.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:20px}
+.action{border:0;border-radius:10px;padding:12px 18px;font-weight:800;cursor:pointer}
+.reveal{background:#164d8f;color:white}
+.close{background:#e4e8ef;color:#1e2c42}
+.scoreboard{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin:12px 0 16px}
+.team{background:#f3f6fb;color:#14223a;border-radius:12px;padding:10px 12px;min-width:190px;text-align:center}
+.team .score{font-size:28px;font-weight:900}
+.team button{margin:4px 2px;border:0;border-radius:8px;padding:7px 10px;cursor:pointer;font-weight:800}
+.plus{background:#d9f0df} .minus{background:#f6dddd}
+.grammar-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.gbox{background:#f3f6fb;border:1px solid #d7dfeb;border-radius:12px;padding:14px}
+.gbox h3{margin:0 0 8px;color:#164d8f}
+.gbox p{margin:6px 0;line-height:1.35}
+.gbox.wide{grid-column:1/-1}
+.warning{background:#fff3cd;border-left:6px solid #e2a400;padding:12px;border-radius:8px;margin-top:14px}
+.grammar-title{font-size:30px;font-weight:900;margin:0 0 16px;color:#123a6d}
+@media (max-width:760px){
+ .board{grid-template-columns:1fr 1fr}
+ .cat{min-height:58px}
+ .tile{min-height:78px}
+ .grammar-grid{grid-template-columns:1fr}
+ .gbox.wide{grid-column:auto}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>LESSON 9 JEOPARDY</h1>
+  <div class="scoreboard">
+    <div class="team">Team 1<div class="score" id="s1">0</div><button class="plus" data-team="1" data-delta="100">+100</button><button class="minus" data-team="1" data-delta="-100">−100</button></div>
+    <div class="team">Team 2<div class="score" id="s2">0</div><button class="plus" data-team="2" data-delta="100">+100</button><button class="minus" data-team="2" data-delta="-100">−100</button></div>
+  </div>
+  <div class="toolbar">
+    <button class="tool" id="grammarBtn">GRAMMAR TO USE</button>
+    <button class="tool" id="reset">RESET GAME</button>
+  </div>
+  <div class="board" id="board"></div>
+</div>
+
+<div class="modal" id="modal" aria-hidden="true">
+  <div class="card">
+    <div class="points" id="mpoints"></div>
+    <div class="question" id="mquestion"></div>
+    <div class="answer" id="manswer"></div>
+    <div class="actions">
+      <button class="action reveal" id="reveal">SHOW ANSWER</button>
+      <button class="action close" id="close">BACK TO BOARD</button>
+    </div>
+  </div>
+</div>
+
+<div class="modal" id="grammarModal" aria-hidden="true">
+  <div class="card">
+    <div class="grammar-title">GRAMMAR TO USE</div>
+    
+<div class="grammar-grid">
+  <div class="gbox">
+    <h3>1. First Conditional</h3>
+    <p><b>Real / possible future situation</b></p>
+    <p><b>If + Present Simple, will + infinitive</b></p>
+    <p>If the enemy attacks, the unit will launch a counterattack.</p>
+  </div>
+  <div class="gbox">
+    <h3>2. Second Conditional</h3>
+    <p><b>Imaginary / unlikely present or future situation</b></p>
+    <p><b>If + Past Simple, would/could + infinitive</b></p>
+    <p>If the unit had greater mobility, it could maneuver more quickly.</p>
+  </div>
+  <div class="gbox">
+    <h3>3. Third Conditional</h3>
+    <p><b>Imaginary past situation</b></p>
+    <p><b>If + Past Perfect, would/could have + V3</b></p>
+    <p>If the engineer battalion had cleared the obstacle, the infantry would have advanced faster.</p>
+  </div>
+  <div class="gbox">
+    <h3>4. Mixed Conditional</h3>
+    <p><b>Past cause + present result</b></p>
+    <p><b>If + Past Perfect, would/could + infinitive</b></p>
+    <p>If the vehicles had received proper maintenance, the unit would have greater mobility now.</p>
+  </div>
+  <div class="gbox wide">
+    <h3>5. Subjunctive Mood</h3>
+    <p><b>recommend / insist / order that + subject + infinitive without to</b></p>
+    <p>The commander recommends that the signal battalion restore communication.</p>
+    <p><b>It is important / essential that + subject + infinitive without to</b></p>
+    <p>It is essential that every unit maintain communication.</p>
+    <p><b>Passive: that + subject + be + V3</b></p>
+    <p>The commander insists that the vehicles be checked immediately.</p>
+  </div>
+</div>
+<p class="warning"><b>Important:</b> after <b>if</b>, do not use <b>will</b> or <b>would</b> in these conditional patterns.</p>
+
+    <div class="actions">
+      <button class="action close" id="closeGrammar">BACK TO BOARD</button>
+    </div>
+  </div>
+</div>
+
+<script>
+const data = [{"name": "VOCABULARY", "cards": [[100, "Translate into English: «огневая мощь».", "firepower"], [200, "Translate into English: «подвижность».", "mobility"], [300, "What is the English term for «бронетранспортёр»?", "armored personnel carrier (APC)"], [400, "Explain in English without using the words battle or fight: battlefield.", "A place or area where military forces are fighting."], [500, "Give three Lesson 9 terms that name military units.", "Possible answers: infantry battalion, aviation battalion, engineer battalion, signal battalion, air defense artillery battalion, military police company."]]}, {"name": "WHAT HAPPENS IF...?", "cards": [[100, "Use the FIRST CONDITIONAL.\nComplete: If the unit has greater mobility, ...", "Grammar: If + Present Simple, will + infinitive.\nPossible answer: If the unit has greater mobility, it will change position more quickly."], [200, "Use the FIRST CONDITIONAL.\nComplete: If an armored personnel carrier breaks down on the battlefield, ...", "Grammar: If + Present Simple, will + infinitive.\nPossible answer: If an armored personnel carrier breaks down on the battlefield, the maintenance personnel will repair it."], [300, "Use the FIRST CONDITIONAL.\nComplete: If the enemy attacks our position, ...", "Grammar: If + Present Simple, will + infinitive.\nPossible answer: If the enemy attacks our position, we will repel the attack / launch a counterattack."], [400, "Use the SECOND CONDITIONAL.\nRewrite as an unreal situation:\nIf the signal battalion cannot maintain communication, the commander has difficulty controlling the units.", "Grammar: If + Past Simple, would/could + infinitive.\nPossible answer: If the signal battalion could not maintain communication, the commander would have difficulty controlling the units."], [500, "Use the SECOND CONDITIONAL.\nMake one sentence using firepower and mobility.", "Grammar: If + Past Simple, would/could + infinitive.\nPossible answer: If the unit had greater firepower, it could support the maneuver more effectively."]]}, {"name": "COMMANDER'S ORDERS", "cards": [[100, "Use the SUBJUNCTIVE MOOD.\nThe vehicles have not been checked. Give a recommendation with:\nIt is essential that ...", "Pattern: It is essential that + subject + infinitive without to.\nPossible answer: It is essential that the maintenance personnel check all vehicles."], [200, "Use the SUBJUNCTIVE MOOD.\nCommunication between two units is poor. Use:\nThe commander recommends that ...", "Pattern: recommend that + subject + infinitive without to.\nPossible answer: The commander recommends that the signal battalion restore communication."], [300, "Use the SUBJUNCTIVE MOOD.\nThe troops must cross a damaged bridge. Use:\nIt is important that ...", "Pattern: It is important that + subject + infinitive without to.\nPossible answer: It is important that the engineer battalion prepare a safe route."], [400, "Use the SUBJUNCTIVE MOOD.\nThe enemy may launch an attack. Use:\nThe commander insists that ...\nUse one Lesson 9 term.", "Pattern: insist that + subject + infinitive without to.\nPossible answer: The commander insists that the infantry be ready to repel the attack."], [500, "Use the SUBJUNCTIVE MOOD twice.\nThe support command has not delivered the necessary supplies. Give TWO different recommendations.", "Patterns: recommend/insist/order that + subject + infinitive; It is essential/important that + subject + infinitive.\nPossible answers: The commander recommends that the support command deliver the supplies immediately. It is essential that the unit receive the supplies before it goes into action."]]}, {"name": "BATTLEFIELD CHALLENGE", "cards": [[100, "Use the SECOND CONDITIONAL.\nWhat would happen if an infantry unit had poor mobility?", "Grammar: If + Past Simple, would/could + infinitive.\nPossible answer: If an infantry unit had poor mobility, it would have difficulty maneuvering on the battlefield."], [200, "Use the FIRST CONDITIONAL.\nMake one sentence with counterattack + firepower.", "Grammar: If + Present Simple, will + infinitive.\nPossible answer: If the enemy attacks, the unit will use its firepower to launch a counterattack."], [300, "Use the THIRD CONDITIONAL.\nThe engineer battalion did not clear the obstacle in time. Say what could have happened differently.", "Grammar: If + Past Perfect, would/could have + V3.\nPossible answer: If the engineer battalion had cleared the obstacle in time, the infantry would have advanced more quickly."], [400, "Use a MIXED CONDITIONAL.\nPoor maintenance caused several APCs to become unavailable. Explain the result now.", "Grammar: If + Past Perfect, would/could + infinitive.\nPossible answer: If the vehicles had received proper maintenance, the unit would have greater mobility now."], [500, "COMMANDER CHALLENGE.\nUse at least 5 Lesson 9 words and TWO different grammar patterns from this list:\n• First Conditional\n• Second Conditional\n• Third Conditional\n• Mixed Conditional\n• Subjunctive Mood\nSituation: communication is unstable, one APC is unavailable, but the unit still has good mobility and firepower.", "Open answer. Check for: at least 5 Lesson 9 terms + two different target grammar structures used correctly."]]}];
+const board = document.getElementById('board');
+const modal = document.getElementById('modal');
+const grammarModal = document.getElementById('grammarModal');
+const q = document.getElementById('mquestion');
+const a = document.getElementById('manswer');
+const pts = document.getElementById('mpoints');
+let currentTile = null;
+let scores = [0,0];
+
+function buildBoard(){
+  board.innerHTML='';
+  data.forEach((cat,ci)=>{
+    const col=document.createElement('div');
+    col.className='col';
+    const head=document.createElement('div');
+    head.className='cat';
+    head.textContent=cat.name;
+    col.appendChild(head);
+    cat.cards.forEach((card,ri)=>{
+      const b=document.createElement('button');
+      b.className='tile';
+      b.textContent=card[0];
+      b.dataset.c=ci; b.dataset.r=ri;
+      b.addEventListener('click',()=>openCard(b,card));
+      col.appendChild(b);
+    });
+    board.appendChild(col);
+  });
+}
+
+function openCard(tile,card){
+  if(tile.classList.contains('used')) return;
+  currentTile=tile;
+  pts.textContent=card[0]+' points';
+  q.textContent=card[1];
+  a.textContent=card[2];
+  a.classList.remove('show');
+  document.getElementById('reveal').textContent='SHOW ANSWER';
+  modal.classList.add('show');
+  modal.setAttribute('aria-hidden','false');
+}
+
+document.getElementById('reveal').addEventListener('click',()=>{
+  a.classList.toggle('show');
+  document.getElementById('reveal').textContent=a.classList.contains('show')?'HIDE ANSWER':'SHOW ANSWER';
+});
+
+document.getElementById('close').addEventListener('click',()=>{
+  if(currentTile) currentTile.classList.add('used');
+  modal.classList.remove('show');
+  modal.setAttribute('aria-hidden','true');
+});
+
+document.getElementById('grammarBtn').addEventListener('click',()=>{
+  grammarModal.classList.add('show');
+  grammarModal.setAttribute('aria-hidden','false');
+});
+
+document.getElementById('closeGrammar').addEventListener('click',()=>{
+  grammarModal.classList.remove('show');
+  grammarModal.setAttribute('aria-hidden','true');
+});
+
+document.querySelectorAll('.team button').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    const i=Number(btn.dataset.team)-1;
+    scores[i]+=Number(btn.dataset.delta);
+    document.getElementById('s'+(i+1)).textContent=scores[i];
+  });
+});
+
+document.getElementById('reset').addEventListener('click',()=>{
+  scores=[0,0];
+  document.getElementById('s1').textContent='0';
+  document.getElementById('s2').textContent='0';
+  currentTile=null;
+  buildBoard();
+});
+
+buildBoard();
+</script>
+</body>
+</html>
