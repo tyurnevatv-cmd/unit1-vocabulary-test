@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Lesson 8 – Picture Match</title>
+<style>
+  :root { --bg:#f4f6f8; --card:#fff; --ink:#1f2933; --line:#cbd2d9; --ok:#dff5e7; --bad:#fde2e2; }
+  * { box-sizing:border-box; }
+  body { margin:0; font-family:Arial,Helvetica,sans-serif; background:var(--bg); color:var(--ink); }
+  .wrap { max-width:1150px; margin:0 auto; padding:24px; }
+  h1 { margin:0 0 6px; font-size:30px; }
+  .subtitle { margin:0 0 18px; font-size:17px; }
+  .topbar { display:flex; gap:12px; flex-wrap:wrap; align-items:center; margin-bottom:18px; }
+  .score { font-weight:700; padding:10px 14px; background:white; border:1px solid var(--line); border-radius:10px; }
+  button { border:0; border-radius:10px; padding:10px 14px; font-weight:700; cursor:pointer; background:#263238; color:white; }
+  .grid { display:grid; grid-template-columns:1.15fr .85fr; gap:22px; }
+  .panel { background:white; border:1px solid var(--line); border-radius:16px; padding:16px; box-shadow:0 2px 8px rgba(0,0,0,.05); }
+  .panel h2 { margin:0 0 12px; font-size:20px; }
+  #pictures { display:grid; grid-template-columns:repeat(3,1fr); gap:12px; }
+  .pic { min-height:150px; border:2px solid var(--line); border-radius:14px; background:#fbfcfd; display:flex; align-items:center; justify-content:center; padding:8px; cursor:grab; user-select:none; transition:.15s; }
+  .pic:hover { transform:translateY(-2px); box-shadow:0 4px 12px rgba(0,0,0,.08); }
+  .pic.selected { outline:4px solid #8bb7ff; }
+  .pic svg { width:100%; height:125px; }
+  .pic.done { opacity:.28; cursor:default; }
+  #targets { display:grid; gap:10px; }
+  .target { min-height:66px; border:2px dashed #aeb8c2; border-radius:12px; padding:10px 14px; display:flex; align-items:center; justify-content:space-between; gap:12px; background:#fafbfc; font-size:18px; font-weight:700; }
+  .target.dragover { background:#eef5ff; border-color:#5c89c9; }
+  .target.correct { background:var(--ok); border-style:solid; border-color:#62b57d; }
+  .target.wrong { background:var(--bad); border-color:#d76969; }
+  .mini { width:64px; height:46px; display:flex; align-items:center; }
+  .mini svg { width:64px; height:46px; }
+  .hint { margin-top:12px; font-size:14px; color:#5e6c78; line-height:1.4; }
+  .message { min-height:28px; margin:12px 0 0; font-weight:700; }
+  @media (max-width:800px) {
+    .grid { grid-template-columns:1fr; }
+    #pictures { grid-template-columns:repeat(2,1fr); }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>Lesson 8 – Picture Match</h1>
+  <p class="subtitle">Drag each picture to the correct word. You can also tap a picture and then tap a word.</p>
+  <div class="topbar">
+    <div class="score">Score: <span id="score">0</span> / 12</div>
+    <button id="reset">Restart</button>
+  </div>
+  <div class="grid">
+    <section class="panel">
+      <h2>Pictures</h2>
+      <div id="pictures"></div>
+      <div class="hint">Tip: If you are using a phone or tablet, tap a picture first, then tap the matching word.</div>
+    </section>
+    <section class="panel">
+      <h2>Words</h2>
+      <div id="targets"></div>
+      <div class="message" id="message"></div>
+    </section>
+  </div>
+</div>
+
+<script>
+const ITEMS = [{"word": "steel helmet", "svg": "<svg viewBox=\"0 0 200 150\" xmlns=\"http://www.w3.org/2000/svg\">\n      <path d=\"M40 90 Q45 35 100 28 Q155 35 160 90 Z\" fill=\"#d8dde3\" stroke=\"#20242a\" stroke-width=\"6\"/>\n      <rect x=\"30\" y=\"88\" width=\"140\" height=\"18\" rx=\"8\" fill=\"#aab2bd\" stroke=\"#20242a\" stroke-width=\"6\"/>\n      <path d=\"M62 105 Q70 128 88 132\" fill=\"none\" stroke=\"#20242a\" stroke-width=\"5\"/>\n      <path d=\"M138 105 Q130 128 112 132\" fill=\"none\" stroke=\"#20242a\" stroke-width=\"5\"/>\n    </svg>"}, {"word": "combat boots", "svg": "<svg viewBox=\"0 0 200 150\" xmlns=\"http://www.w3.org/2000/svg\">\n      <path d=\"M38 30 h48 v55 q0 10 14 13 l22 6 q16 5 18 18 H38 Z\" fill=\"#5e646b\" stroke=\"#20242a\" stroke-width=\"6\"/>\n      <path d=\"M110 30 h48 v56 q0 9 12 12 l12 4 q12 4 14 20 h-86 Z\" fill=\"#737a82\" stroke=\"#20242a\" stroke-width=\"6\"/>\n      <path d=\"M48 48 h28 M48 62 h28 M120 48 h28 M120 62 h28\" stroke=\"#e8edf2\" stroke-width=\"5\"/>\n    </svg>"}, {"word": "service coat", "svg": "<svg viewBox=\"0 0 200 150\" xmlns=\"http://www.w3.org/2000/svg\">\n      <path d=\"M68 25 L45 45 58 132 96 132 100 72 104 132 142 132 155 45 132 25 112 40 88 40 Z\" fill=\"#8fa1b3\" stroke=\"#20242a\" stroke-width=\"5\"/>\n      <path d=\"M88 40 L100 60 112 40\" fill=\"#f7f8fa\" stroke=\"#20242a\" stroke-width=\"4\"/>\n      <circle cx=\"92\" cy=\"76\" r=\"4\" fill=\"#20242a\"/><circle cx=\"108\" cy=\"76\" r=\"4\" fill=\"#20242a\"/>\n      <circle cx=\"92\" cy=\"94\" r=\"4\" fill=\"#20242a\"/><circle cx=\"108\" cy=\"94\" r=\"4\" fill=\"#20242a\"/>\n    </svg>"}, {"word": "field jacket", "svg": "<svg viewBox=\"0 0 200 150\" xmlns=\"http://www.w3.org/2000/svg\">\n      <path d=\"M60 30 L38 50 50 132 150 132 162 50 140 30 118 42 82 42 Z\" fill=\"#7b8f6b\" stroke=\"#20242a\" stroke-width=\"5\"/>\n      <rect x=\"60\" y=\"72\" width=\"28\" height=\"24\" fill=\"#91a782\" stroke=\"#20242a\" stroke-width=\"4\"/>\n      <rect x=\"112\" y=\"72\" width=\"28\" height=\"24\" fill=\"#91a782\" stroke=\"#20242a\" stroke-width=\"4\"/>\n      <path d=\"M100 42 V132\" stroke=\"#20242a\" stroke-width=\"4\"/>\n    </svg>"}, {"word": "service shirt", "svg": "<svg viewBox=\"0 0 200 150\" xmlns=\"http://www.w3.org/2000/svg\">\n      <path d=\"M65 28 L42 45 56 78 72 68 72 132 128 132 128 68 144 78 158 45 135 28 115 40 85 40 Z\" fill=\"#e4e8ec\" stroke=\"#20242a\" stroke-width=\"5\"/>\n      <path d=\"M85 40 L100 58 115 40\" fill=\"#ffffff\" stroke=\"#20242a\" stroke-width=\"4\"/>\n      <path d=\"M100 58 V132\" stroke=\"#20242a\" stroke-width=\"4\"/>\n      <rect x=\"78\" y=\"72\" width=\"20\" height=\"16\" fill=\"#ffffff\" stroke=\"#20242a\" stroke-width=\"3\"/>\n      <rect x=\"102\" y=\"72\" width=\"20\" height=\"16\" fill=\"#ffffff\" stroke=\"#20242a\" stroke-width=\"3\"/>\n    </svg>"}, {"word": "overcoat", "svg": "<svg viewBox=\"0 0 200 150\" xmlns=\"http://www.w3.org/2000/svg\">\n      <path d=\"M72 20 L48 40 58 138 92 138 100 72 108 138 142 138 152 40 128 20 112 38 88 38 Z\" fill=\"#6f7780\" stroke=\"#20242a\" stroke-width=\"5\"/>\n      <path d=\"M88 38 L100 55 112 38\" fill=\"#a8b0b8\" stroke=\"#20242a\" stroke-width=\"4\"/>\n      <circle cx=\"90\" cy=\"78\" r=\"4\" fill=\"#20242a\"/><circle cx=\"110\" cy=\"78\" r=\"4\" fill=\"#20242a\"/>\n      <circle cx=\"90\" cy=\"98\" r=\"4\" fill=\"#20242a\"/><circle cx=\"110\" cy=\"98\" r=\"4\" fill=\"#20242a\"/>\n    </svg>"}, {"word": "cape", "svg": "<svg viewBox=\"0 0 200 150\" xmlns=\"http://www.w3.org/2000/svg\">\n      <circle cx=\"100\" cy=\"30\" r=\"18\" fill=\"#e0b48a\" stroke=\"#20242a\" stroke-width=\"4\"/>\n      <path d=\"M76 47 Q100 58 124 47 L160 132 H40 Z\" fill=\"#8290a3\" stroke=\"#20242a\" stroke-width=\"5\"/>\n      <path d=\"M100 50 V126\" stroke=\"#20242a\" stroke-width=\"4\" stroke-dasharray=\"8 6\"/>\n    </svg>"}, {"word": "waist belt", "svg": "<svg viewBox=\"0 0 200 150\" xmlns=\"http://www.w3.org/2000/svg\">\n      <rect x=\"20\" y=\"58\" width=\"160\" height=\"34\" rx=\"8\" fill=\"#7c5d3b\" stroke=\"#20242a\" stroke-width=\"5\"/>\n      <rect x=\"78\" y=\"50\" width=\"44\" height=\"50\" rx=\"5\" fill=\"#d2b36a\" stroke=\"#20242a\" stroke-width=\"5\"/>\n      <rect x=\"89\" y=\"61\" width=\"22\" height=\"28\" fill=\"#f7f0d5\" stroke=\"#20242a\" stroke-width=\"4\"/>\n    </svg>"}, {"word": "medal", "svg": "<svg viewBox=\"0 0 200 150\" xmlns=\"http://www.w3.org/2000/svg\">\n      <path d=\"M70 18 L92 18 100 52 108 18 130 18 115 72 85 72 Z\" fill=\"#8ea7c7\" stroke=\"#20242a\" stroke-width=\"5\"/>\n      <circle cx=\"100\" cy=\"98\" r=\"34\" fill=\"#d7b65f\" stroke=\"#20242a\" stroke-width=\"5\"/>\n      <path d=\"M100 78 l7 14 16 2-12 11 3 16-14-8-14 8 3-16-12-11 16-2z\" fill=\"#f6e8a8\"/>\n    </svg>"}, {"word": "badge", "svg": "<svg viewBox=\"0 0 200 150\" xmlns=\"http://www.w3.org/2000/svg\">\n      <path d=\"M100 20 L125 38 154 42 142 70 148 100 118 104 100 128 82 104 52 100 58 70 46 42 75 38 Z\" fill=\"#c8ced6\" stroke=\"#20242a\" stroke-width=\"5\"/>\n      <circle cx=\"100\" cy=\"72\" r=\"24\" fill=\"#eef1f4\" stroke=\"#20242a\" stroke-width=\"4\"/>\n      <path d=\"M100 55 l6 12 13 2-10 9 3 13-12-6-12 6 3-13-10-9 13-2z\" fill=\"#9098a3\"/>\n    </svg>"}, {"word": "identification card", "svg": "<svg viewBox=\"0 0 200 150\" xmlns=\"http://www.w3.org/2000/svg\">\n      <rect x=\"28\" y=\"28\" width=\"144\" height=\"94\" rx=\"10\" fill=\"#f5f7f9\" stroke=\"#20242a\" stroke-width=\"5\"/>\n      <circle cx=\"65\" cy=\"68\" r=\"18\" fill=\"#bcc5ce\"/>\n      <path d=\"M42 104 Q65 80 88 104\" fill=\"#bcc5ce\"/>\n      <rect x=\"102\" y=\"52\" width=\"48\" height=\"7\" rx=\"3\" fill=\"#8793a0\"/>\n      <rect x=\"102\" y=\"70\" width=\"38\" height=\"7\" rx=\"3\" fill=\"#a7b0ba\"/>\n      <rect x=\"102\" y=\"88\" width=\"44\" height=\"7\" rx=\"3\" fill=\"#a7b0ba\"/>\n    </svg>"}, {"word": "vehicle", "svg": "<svg viewBox=\"0 0 200 150\" xmlns=\"http://www.w3.org/2000/svg\">\n      <path d=\"M42 88 L54 58 H126 L148 76 H164 Q174 76 176 88 L180 110 H28 L34 94 Q36 88 42 88 Z\" fill=\"#7f909f\" stroke=\"#20242a\" stroke-width=\"5\"/>\n      <circle cx=\"62\" cy=\"112\" r=\"16\" fill=\"#353b42\"/><circle cx=\"145\" cy=\"112\" r=\"16\" fill=\"#353b42\"/>\n      <circle cx=\"62\" cy=\"112\" r=\"7\" fill=\"#b9c1c9\"/><circle cx=\"145\" cy=\"112\" r=\"7\" fill=\"#b9c1c9\"/>\n      <rect x=\"65\" y=\"64\" width=\"46\" height=\"20\" fill=\"#dce9f2\" stroke=\"#20242a\" stroke-width=\"4\"/>\n    </svg>"}];
+let selectedId = null;
+let score = 0;
+
+function shuffle(a) {
+  const arr = [...a];
+  for (let i=arr.length-1;i>0;i--) {
+    const j = Math.floor(Math.random()*(i+1));
+    [arr[i],arr[j]]=[arr[j],arr[i]];
+  }
+  return arr;
+}
+
+function render() {
+  score = 0; selectedId = null;
+  document.getElementById('score').textContent = score;
+  document.getElementById('message').textContent = '';
+  const pics = document.getElementById('pictures');
+  const targets = document.getElementById('targets');
+  pics.innerHTML = ''; targets.innerHTML = '';
+
+  shuffle(ITEMS).forEach((item, index) => {
+    const id = 'p' + index + '_' + Math.random().toString(36).slice(2,7);
+    const el = document.createElement('div');
+    el.className = 'pic';
+    el.draggable = true;
+    el.dataset.word = item.word;
+    el.id = id;
+    el.innerHTML = item.svg;
+    el.setAttribute('aria-label','Picture card');
+    el.addEventListener('dragstart', e => {
+      e.dataTransfer.setData('text/plain', id);
+    });
+    el.addEventListener('click', () => {
+      if (el.classList.contains('done')) return;
+      document.querySelectorAll('.pic').forEach(x=>x.classList.remove('selected'));
+      selectedId = id;
+      el.classList.add('selected');
+    });
+    pics.appendChild(el);
+  });
+
+  shuffle(ITEMS).forEach(item => {
+    const t = document.createElement('div');
+    t.className = 'target';
+    t.dataset.word = item.word;
+    t.innerHTML = `<span>${item.word}</span><span class="mini"></span>`;
+    t.addEventListener('dragover', e => {e.preventDefault(); t.classList.add('dragover');});
+    t.addEventListener('dragleave', () => t.classList.remove('dragover'));
+    t.addEventListener('drop', e => {
+      e.preventDefault(); t.classList.remove('dragover');
+      const id = e.dataTransfer.getData('text/plain');
+      tryMatch(id, t);
+    });
+    t.addEventListener('click', () => {
+      if (selectedId) tryMatch(selectedId, t);
+    });
+    targets.appendChild(t);
+  });
+}
+
+function tryMatch(id, target) {
+  const pic = document.getElementById(id);
+  if (!pic || pic.classList.contains('done') || target.classList.contains('correct')) return;
+  document.querySelectorAll('.pic').forEach(x=>x.classList.remove('selected'));
+  selectedId = null;
+
+  if (pic.dataset.word === target.dataset.word) {
+    target.classList.add('correct');
+    target.querySelector('.mini').innerHTML = pic.innerHTML;
+    pic.classList.add('done');
+    pic.draggable = false;
+    score++;
+    document.getElementById('score').textContent = score;
+    document.getElementById('message').textContent = score === ITEMS.length ? 'Excellent! All matches are correct.' : 'Correct!';
+  } else {
+    target.classList.add('wrong');
+    document.getElementById('message').textContent = 'Try again.';
+    setTimeout(()=>target.classList.remove('wrong'), 650);
+  }
+}
+
+document.getElementById('reset').addEventListener('click', render);
+render();
+</script>
+</body>
+</html>
